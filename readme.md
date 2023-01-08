@@ -49,7 +49,7 @@ Below are a few resources that may help you out. :)
 [Postgres Install](https://www.postgresql.org/download/)\
 [Node.js Install](https://nodejs.org/en/download/)
 
-#### Some Extra Stuff (Not Sponsored)\
+#### Some Extra Stuff (Not Sponsored)
 
 [Railway](https://www.railway.app) (Cheap Database and Bot hosting, first 5 dollars each month is free when providing a Credit Card)\
 [Linode](https://www.linode.com/) (More Cheap Hosting)\
