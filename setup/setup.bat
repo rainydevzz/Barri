@@ -1,0 +1,1 @@
+cd .. & npm install & cd ./src & npx prisma db pull & npx prisma generate & echo Setup Done!
