@@ -28,13 +28,11 @@ Remove the word 'example' from each of the file names.
 
 #### Setup Script
 
-(WIP)\
 Navigate to `/setup/setup.bat` if on windows or `setup/setup.sh` if on linux and run the respective script.\
 This will install all the needed dependencies via NPM and generate the Prisma Client.
 
 #### Final Steps
 
-(WIP)\
 Navigate to `/setup/start.bat` if on windows or `setup/start.sh` if on linux and run the respective script.\
 This will execute the index file and start the bot.
 
@@ -46,7 +44,7 @@ Below are a few resources that may help you out. :)
 
 #### Required Resources
 
-[Postgres Install](https://www.postgresql.org/download/)\
+[Postgres Install](https://www.postgresql.org/download/) (Not needed locally if using Railway or a similar service)\
 [Node.js Install](https://nodejs.org/en/download/)
 
 #### Some Extra Stuff (Not Sponsored)
