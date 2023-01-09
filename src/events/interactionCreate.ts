@@ -1,4 +1,4 @@
-import { Interaction, InteractionTypes, CommandInteraction } from "oceanic.js";
+import { InteractionTypes } from "oceanic.js";
 import BotClient from "../bot";
 
 export async function execute(bot: BotClient, interaction: any): Promise<void> {

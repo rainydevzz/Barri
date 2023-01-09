@@ -39,6 +39,22 @@ class BotClient extends Client {
         return total;
     }
 
+    getOptions(options: Array<any>): void | Array<string> {
+        // options will typically be interaction.data.options.raw
+        if(!options[0]) { return }; // no options
+        let optionArr = [];
+        if(options[0].type == 1) { // for subcommands
+            for(const o of options[0].options) {
+                optionArr.push(o.value);
+            }
+        } else { // for base commands
+            for (const o of options) {
+                optionArr.push(o.value);
+            }
+        }
+        return optionArr;
+    }
+
     startEventHandler() {   
         try {
             for (const f of eventFiles) {

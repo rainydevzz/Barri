@@ -1,10 +1,10 @@
-import { ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ApplicationCommandTypes, ApplicationCommandOptionTypes } from "oceanic.js";
 
 const commands: Array<any> = [
     {
         name: 'ping',
         description: 'ping the bot!',
-        type: ApplicationCommandType.ChatInput
+        type: ApplicationCommandTypes.CHAT_INPUT
     }
 ];
 
