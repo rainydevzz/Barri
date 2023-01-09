@@ -17,7 +17,7 @@ export async function execute(interaction: CommandInteraction): Promise<void> {
         return;
     } else {
         const opt = interaction.options[0];
-        // todo: finish help cmd
+        // if
         if(opt.type == ApplicationCommandOptionTypes.SUB_COMMAND) {
             let descStr = "";
             for(const o of opt.options) {
@@ -32,7 +32,18 @@ export async function execute(interaction: CommandInteraction): Promise<void> {
             await interaction.createMessage({embeds: [embed]});
             return;
         } else {
-
+            let descStr = "";
+            for(const c of opt.options) {
+                descStr += `**${o.name}** - ${o.description}`;
+            }
+            let embed = {
+                title: 'Help Commands',
+                description: descStr,
+                color: 0x072a6c
+            }
+    
+            await interaction.createMessage({embeds: [embed]});
+            return;
         }
     }
 }
