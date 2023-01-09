@@ -47,6 +47,16 @@ Below are a few resources that may help you out. :)
 [Postgres Install](https://www.postgresql.org/download/) (Not needed locally if using Railway or a similar service)\
 [Node.js Install](https://nodejs.org/en/download/)
 
+#### Learning Resources
+
+If you're interested in learning more about the tools this bot utilizes, check the links here.
+
+[Node.js](https://nodejs.org/en/) - Javascript Runtime that runs the code\
+[Oceanic](https://github.com/OceanicJS/Oceanic) - Discord library the bot uses\
+[Prisma](https://www.prisma.io/) - ORM the bot uses to interact with the database\
+[PostgreSQL](https://www.postgresql.org/) - Database the bot uses\
+[Typescript](https://www.typescriptlang.org/) - Language the bot is written in
+
 #### Some Extra Stuff (Not Sponsored)
 
 [Railway](https://www.railway.app) (Cheap Database and Bot hosting, first 5 dollars each month is free when providing a Credit Card)\
