@@ -18,13 +18,19 @@ Feel free to continue once you have set up a bot account and have its token read
 #### Requirements
 
 You will need a few things to setup this bot. Most notably, Node.js is required as well as a running PostgreSQL database.\
-Knowledge of Typescript, Node.js, SQL, and the Oceanic library are *not* required.
+You may also need basic knowledge of SQL and setting up a Postgres database for some commands to work correctly (like setting antispam settings)\
+Knowledge of Typescript, Node.js, and the Oceanic library are *not* required.
 
 #### Config Files
 
 Navigate to `/src/example.cfg.json` and replace "BOT TOKEN HERE" with your bot token.\
 Next, navigate to `/src/prisma/example.env` and replace DATABASE_URL_HERE with your PostgreSQL database url.\
 Remove the word 'example' from each of the file names. (example.env becomes .env and example.cfg.json becomes cfg.json)
+
+#### Database Setup
+
+You will need to set up a PostgreSQL database for the Antispam setup.\
+Once you have set that up, you can follow the SQL statement below to set up the table. (wip)
 
 #### Setup Script
 
