@@ -24,7 +24,8 @@ Knowledge of Typescript, Node.js, and the Oceanic library are *not* required.
 #### Database Setup
 
 You will need to set up a PostgreSQL database for the Antispam setup.\
-Once you have set that up, you can follow the SQL statement below to set up the table. (wip)
+Once you have set that up, you can follow the SQL statement below to set up the table. (wip)\
+`CREATE TABLE IF NOT EXISTS antispam (guild TEXT PRIMARY KEY, limit INTEGER, interval INTEGER)`
 
 #### Config Files
 
