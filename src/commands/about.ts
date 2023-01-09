@@ -1,5 +1,5 @@
 import { CommandInteraction } from "oceanic.js";
-import BotClient from "../bot";
+import { BotClient } from "../bot";
 
 export async function execute(interaction: CommandInteraction, bot: BotClient): Promise<void> {
     let embed = {

@@ -1,4 +1,4 @@
-import BotClient from '../bot';
+import { BotClient } from '../bot';
 
 export async function execute(bot: BotClient): Promise<void> {
     await bot.initialize();

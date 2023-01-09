@@ -8,7 +8,7 @@ import fs from 'fs';
 const eventPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventPath).filter(f => f.endsWith('.ts'));
 
-class BotClient extends Client {
+export class BotClient extends Client {
     spamCache: Map<String, Array<any>> = new Map();
     db: PrismaClient = client;
 
@@ -39,9 +39,9 @@ class BotClient extends Client {
         return total;
     }
 
-    getOptions(options: Array<any>): void | Array<string> {
+    getOptions(options: Array<any>): Array<any> {
         // options will typically be interaction.data.options.raw
-        if(!options[0]) { return }; // no options
+        if(!options[0]) { return [] }; // no options
         let optionArr = [];
         if(options[0].type == 1) { // for subcommands
             for(const o of options[0].options) {
@@ -73,5 +73,3 @@ class BotClient extends Client {
         }
     }
 }
-
-export default BotClient;

@@ -24,7 +24,7 @@ Knowledge of Typescript, Node.js, SQL, and the Oceanic library are *not* require
 
 Navigate to `/src/example.cfg.json` and replace "BOT TOKEN HERE" with your bot token.\
 Next, navigate to `/src/prisma/example.env` and replace DATABASE_URL_HERE with your PostgreSQL database url.\
-Remove the word 'example' from each of the file names.
+Remove the word 'example' from each of the file names. (example.env becomes .env and example.cfg.json becomes cfg.json)
 
 #### Setup Script
 
