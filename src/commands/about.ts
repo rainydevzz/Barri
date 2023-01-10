@@ -7,7 +7,7 @@ export async function execute(interaction: CommandInteraction, bot: BotClient): 
         description: 'Hello! I am a moderation bot with several useful utilities. Run /help for more info!',
         color: 0x00008b,
         timestamp: new Date().toISOString(),
-        thumbnail: bot.user.avatarURL("png")
+        thumbnail: {url: bot.user.avatarURL("png")}
     }
 
     await interaction.createMessage({embeds: [embed]});

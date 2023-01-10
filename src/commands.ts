@@ -14,7 +14,7 @@ const commands: Array<any> = [
     {
         name: 'help',
         description: 'see the bot commands!',
-        type: ApplicationCommandOptionTypes.CHAT_INPUT,
+        type: ApplicationCommandTypes.CHAT_INPUT,
         options: [
             {
                 name: 'command',
