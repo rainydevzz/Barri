@@ -1,5 +1,6 @@
 import { Client } from 'oceanic.js';
 import { PrismaClient } from '@prisma/client';
+import { DBOPtions } from './types/dboptions';
 import commands from './commands';
 import client from './prisma/client';
 import path from 'path';
@@ -10,7 +11,7 @@ const eventFiles = fs.readdirSync(eventPath).filter(f => f.endsWith('.ts'));
 
 export class BotClient extends Client {
     spamCache: Map<String, Array<any>> = new Map();
-    dbCache: Map<String, any> = new Map();
+    dbCache: Map<String, DBOPtions> = new Map();
     db: PrismaClient = client;
 
     async syncCommands(): Promise<void> {
@@ -25,11 +26,15 @@ export class BotClient extends Client {
         console.log("Setup complete!");
     }
 
-    checkSpam(guildID) {
+    checkSpam(guildID): boolean {
         let res = this.dbCache.get(guildID);
         if(!res) {
-            // do later
+            let dbres = await this.db.findFirst({where: {guild: guildID}});
+            if(!dbres[0]) return false;
+            this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount});
+            res = this.dbCache.get(guildID);
         }
+        // todo
     }
 
     getCommandsLength(): number {
