@@ -26,7 +26,7 @@ export class BotClient extends Client {
         console.log("Setup complete!");
     }
 
-    checkSpam(guildID): boolean {
+    checkSpam(guildID, msg): boolean {
         let res = this.dbCache.get(guildID);
         if(!res) {
             let dbres = await this.db.findFirst({where: {guild: guildID}});
@@ -34,7 +34,22 @@ export class BotClient extends Client {
             this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount});
             res = this.dbCache.get(guildID);
         }
-        // todo
+        let uid = msg.author.id;
+        let sres = this.spamCache.get(guildID);
+        if(!sres) { this.spamCache.set(guildID, [{uid: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
+        let ures = this.spamCache.get(guildID).find(uid);
+        if(!ures) {
+            this.spamCache.set(guildID, [{uid: [{timestamp: msg.timestamp.getTime()}]}]);
+            return false;
+        }
+        if(ures.length >= res.messagecount) {
+            let dif = ures.uid[0].timestamp.getTime() - ures.uid[res.msgcount].getTime();
+            if(dif < res.interval) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     getCommandsLength(): number {
