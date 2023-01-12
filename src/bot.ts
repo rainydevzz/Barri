@@ -1,4 +1,4 @@
-import { Client } from 'oceanic.js';
+import { Client, Message } from 'oceanic.js';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
 import commands from './commands';
@@ -26,29 +26,34 @@ export class BotClient extends Client {
         console.log("Setup complete!");
     }
 
-    checkSpam(guildID, msg): boolean {
+    async checkSpam(guildID: string, msg: Message): Promise<boolean> {
         let res = this.dbCache.get(guildID);
         if(!res) {
-            let dbres = await this.db.findFirst({where: {guild: guildID}});
-            if(!dbres[0]) return false;
+            let dbres = await this.db.antispam.findFirst({where: {guild: guildID}});
+            if(!dbres) return false;
             this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount});
             res = this.dbCache.get(guildID);
         }
         let uid = msg.author.id;
         let sres = this.spamCache.get(guildID);
-        if(!sres) { this.spamCache.set(guildID, [{uid: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
-        let ures = this.spamCache.get(guildID).find(uid);
+        if(!sres) { this.spamCache.set(guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
+        let ures = sres.find(u => u.hasOwnProperty(uid))[uid];
         if(!ures) {
-            this.spamCache.set(guildID, [{uid: [{timestamp: msg.timestamp.getTime()}]}]);
+            this.spamCache.set(guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]);
             return false;
         }
-        if(ures.length >= res.messagecount) {
-            let dif = ures.uid[0].timestamp.getTime() - ures.uid[res.msgcount].getTime();
+        ures.push({timestamp: msg.timestamp.getTime()});
+        if(ures.length >= res.msgcount) {
+            let dif = ures[res.msgcount - 1].timestamp - ures[0].timestamp;
+            console.log(dif, res.interval);
             if(dif < res.interval) {
+                sres.find(u => u.hasOwnProperty(uid))[uid] = [];
                 return true;
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
     }
 
