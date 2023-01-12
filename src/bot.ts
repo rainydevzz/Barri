@@ -45,9 +45,8 @@ export class BotClient extends Client {
         ures.push({timestamp: msg.timestamp.getTime()});
         if(ures.length >= res.msgcount) {
             let dif = ures[res.msgcount - 1].timestamp - ures[0].timestamp;
-            console.log(dif, res.interval);
+            sres.find(u => u.hasOwnProperty(uid))[uid] = [];
             if(dif < res.interval) {
-                sres.find(u => u.hasOwnProperty(uid))[uid] = [];
                 return true;
             } else {
                 return false;
