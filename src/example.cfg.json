@@ -1,3 +1,4 @@
 {
-    "token": "BOT TOKEN HERE"
+    "token": "BOT TOKEN HERE",
+    "owners": ["owner", "id(s)", "here"]
 }

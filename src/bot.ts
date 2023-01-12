@@ -1,6 +1,7 @@
 import { Client, Message } from 'oceanic.js';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
+import { owners } from "./cfg.json";
 import commands from './commands';
 import client from './prisma/client';
 import path from 'path';
@@ -58,6 +59,10 @@ export class BotClient extends Client {
         } else {
             return false;
         }
+    }
+
+    isOwner(id: string): boolean {
+        return owners.includes(id);
     }
 
     getCommandsLength(): number {

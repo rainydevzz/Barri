@@ -30,6 +30,7 @@ Once you have set that up, you can follow the SQL statement below to set up the 
 #### Config Files
 
 Navigate to `/src/example.cfg.json` and replace "BOT TOKEN HERE" with your bot token.\
+If you wish to use the bot owner commands, replace the "owners" field with an array of owner id(s) in quotes.\
 Next, navigate to `/src/prisma/example.env` and replace DATABASE_URL_HERE with your PostgreSQL database url.\
 Remove the word 'example' from each of the file names. (example.env becomes .env and example.cfg.json becomes cfg.json)
 
