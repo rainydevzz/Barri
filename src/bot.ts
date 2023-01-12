@@ -28,10 +28,10 @@ export class BotClient extends Client {
 
     async checkSpam(guildID: string, msg: Message): Promise<boolean> {
         let res = this.dbCache.get(guildID);
-        if(!res) {
+        if(!res || (res && new Date().getTime() - res.timestamp >= 60000)) {
             let dbres = await this.db.antispam.findFirst({where: {guild: guildID}});
             if(!dbres) return false;
-            this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount});
+            this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime()});
             res = this.dbCache.get(guildID);
         }
         let uid = msg.author.id;

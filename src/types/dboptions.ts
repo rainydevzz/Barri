@@ -1,4 +1,5 @@
 export interface DBOPtions {
-    msgcount: number,
+    msgcount: number
     interval: number
+    timestamp: number
 }
