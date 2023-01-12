@@ -23,6 +23,19 @@ const commands: Array<any> = [
                 required: false
             }
         ]
+    },
+    {
+        name: 'lock',
+        description: 'lock a channel!',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'channel',
+                description: 'channel to lock',
+                type: ApplicationCommandOptionTypes.CHANNEL,
+                required: true
+            }
+        ]
     }
 ];
 

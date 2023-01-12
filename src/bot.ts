@@ -16,14 +16,18 @@ export class BotClient extends Client {
 
     async syncCommands(): Promise<void> {
         await this.application.bulkEditGlobalCommands(commands);
-        console.log(`${this.getCommandsLength()} commands synced!`)
+        console.log(`${this.getCommandsLength()} commands synced!`);
     }
 
     async initialize(): Promise<void> {
-        console.log(`${this.user.tag} is up! Initializing...`);
-        await this.syncCommands();
-        await this.db.$connect();
-        console.log("Setup complete!");
+        try {
+            console.log(`${this.user.tag} is up! Initializing...`);
+            await this.syncCommands();
+            await this.db.$connect();
+            console.log("Setup complete!");
+        } catch (e) {
+            console.error("Uh oh, something went wrong. Error:", e);
+        }
     }
 
     async checkSpam(guildID: string, msg: Message): Promise<boolean> {
