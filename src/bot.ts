@@ -69,11 +69,11 @@ export class BotClient extends Client {
     getCommandsLength(): number {
         let total = 0;
         for(const co of commands) {
-            total += 1;
+            total++;
             if(co.options) {
                 for(const op of co.options) {
                     if(op.type == 1) {
-                        total += 1;
+                        total++;
                     }
                 }
             }
