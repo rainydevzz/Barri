@@ -15,6 +15,8 @@
 There are several videos and articles online for setting up a bot account, so I will not go over that here.\
 Feel free to continue once you have set up a bot account and have its token ready.
 
+**I will likely run my own instance of the bot in the near future when development is finished for those who'd rather not run their own instance.**
+
 #### Requirements
 
 You will need a few things to setup this bot. Most notably, Node.js is required as well as a running PostgreSQL database.\
