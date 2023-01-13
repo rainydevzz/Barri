@@ -31,20 +31,20 @@ export class BotClient extends Client {
         }
     }
 
-    async checkSpam(guildID: string, msg: Message): Promise<boolean> {
-        let res = this.dbCache.get(guildID);
+    async checkSpam(msg: Message): Promise<boolean> {
+        let res = this.dbCache.get(msg.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp >= 60000)) {
-            let dbres = await this.db.antispam.findFirst({where: {guild: guildID}});
+            let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
             if(!dbres) return false;
-            this.dbCache.set(guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime()});
-            res = this.dbCache.get(guildID);
+            this.dbCache.set(msg.guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime()});
+            res = this.dbCache.get(msg.guildID);
         }
         let uid = msg.author.id;
-        let sres = this.spamCache.get(guildID);
-        if(!sres) { this.spamCache.set(guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
+        let sres = this.spamCache.get(msg.guildID);
+        if(!sres) { this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
         let ures = sres.find(u => u.hasOwnProperty(uid))[uid];
         if(!ures) {
-            this.spamCache.set(guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]);
+            this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]);
             return false;
         }
         ures.push({timestamp: msg.timestamp.getTime()});

@@ -2,7 +2,8 @@ import { BotClient } from "../bot";
 import { Message } from "oceanic.js";
 
 export async function execute(bot: BotClient, msg: Message) {
-    let r = await bot.checkSpam(msg.guild.id, msg);
+    if(msg.author.bot) return;
+    let r = await bot.checkSpam(msg);
     console.log(r);
 }
 
