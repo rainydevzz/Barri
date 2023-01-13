@@ -49,6 +49,31 @@ const commands: Array<any> = [
                 required: true
             }
         ]
+    },
+    {
+        name: 'mute',
+        description: 'mute a user',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'member',
+                description: 'member to timeout',
+                type: ApplicationCommandOptionTypes.USER,
+                required: true
+            },
+            {
+                name: 'duration',
+                description: 'duration in minutes',
+                type: ApplicationCommandOptionTypes.NUMBER,
+                required: true
+            },
+            {
+                name: 'reason',
+                description: 'reason for muting',
+                type: ApplicationCommandOptionTypes.STRING,
+                required: false
+            }
+        ]
     }
 ];
 
