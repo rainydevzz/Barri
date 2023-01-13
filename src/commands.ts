@@ -1,4 +1,4 @@
-import { ApplicationCommandTypes, ApplicationCommandOptionTypes } from "oceanic.js";
+import { ApplicationCommandTypes, ApplicationCommandOptionTypes, Permissions } from "oceanic.js";
 
 const commands: Array<any> = [
     {
@@ -28,6 +28,7 @@ const commands: Array<any> = [
         name: 'lock',
         description: 'lock a channel!',
         type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.MANAGE_CHANNELS,
         options: [
             {
                 name: 'channel',
@@ -41,6 +42,7 @@ const commands: Array<any> = [
         name: 'unlock',
         description: 'unlock a channel!',
         type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.MANAGE_CHANNELS,
         options: [
             {
                 name: 'channel',
@@ -54,6 +56,7 @@ const commands: Array<any> = [
         name: 'mute',
         description: 'mute a user',
         type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.MODERATE_MEMBERS,
         options: [
             {
                 name: 'member',
@@ -72,6 +75,60 @@ const commands: Array<any> = [
                 description: 'reason for muting',
                 type: ApplicationCommandOptionTypes.STRING,
                 required: false
+            }
+        ]
+    },
+    {
+        name: "ban",
+        description: "ban a user!",
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.BAN_MEMBERS,
+        options: [
+            {
+                name: "user",
+                description: "member to ban",
+                type: ApplicationCommandOptionTypes.USER,
+                required: true
+            },
+            {
+                name: "reason",
+                description: "reason for banning",
+                type: ApplicationCommandOptionTypes.STRING,
+                required: false
+            }
+        ]
+    },
+    {
+        name: "kick",
+        description: "kick a user!",
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.MODERATE_MEMBERS,
+        options: [
+            {
+                name: "user",
+                description: "member to kick",
+                type: ApplicationCommandOptionTypes.USER,
+                required: true
+            },
+            {
+                name: "reason",
+                description: "reason for kicking",
+                type: ApplicationCommandOptionTypes.STRING,
+                required: false
+            }
+        ]
+    },
+    {
+        name: "unban",
+        description: "unban someone",
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.BAN_MEMBERS,
+        options: [
+            {
+                name: "user",
+                description: "ID of user to unban",
+                type: ApplicationCommandOptionTypes.STRING,
+                required: true
             }
         ]
     }
