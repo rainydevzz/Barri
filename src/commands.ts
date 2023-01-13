@@ -36,6 +36,19 @@ const commands: Array<any> = [
                 required: true
             }
         ]
+    },
+    {
+        name: 'unlock',
+        description: 'unlock a channel!',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'channel',
+                description: 'channel to unlock',
+                type: ApplicationCommandOptionTypes.CHANNEL,
+                required: true
+            }
+        ]
     }
 ];
 

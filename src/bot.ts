@@ -33,7 +33,7 @@ export class BotClient extends Client {
 
     async checkSpam(msg: Message): Promise<boolean> {
         let res = this.dbCache.get(msg.guildID);
-        if(!res || (res && new Date().getTime() - res.timestamp >= 60000)) {
+        if(!res || (res && new Date().getTime() - res.timestamp >= 90000)) {
             let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
             if(!dbres) return false;
             this.dbCache.set(msg.guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime()});
@@ -42,11 +42,12 @@ export class BotClient extends Client {
         let uid = msg.author.id;
         let sres = this.spamCache.get(msg.guildID);
         if(!sres) { this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
-        let ures = sres.find(u => u.hasOwnProperty(uid))[uid];
+        let ures = sres.find(u => u.hasOwnProperty(uid));
         if(!ures) {
-            this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]);
+            sres.push({[uid]: [{timestamp: msg.timestamp.getTime()}]});
             return false;
         }
+        ures = ures[uid];
         ures.push({timestamp: msg.timestamp.getTime()});
         if(ures.length >= res.msgcount) {
             let dif = ures[res.msgcount - 1].timestamp - ures[0].timestamp;

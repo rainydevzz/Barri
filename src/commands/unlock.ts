@@ -8,19 +8,18 @@ export async function execute(interaction: ExtInteraction, bot: BotClient) {
     const role: Role = guild.roles.find(r => r.name == "@everyone");
 
     let embed = {
-        title: "Locked Channel",
-        description: "This channel is currently locked. No messages can be sent.",
+        title: "Unlocked Channel",
+        description: "This channel has been unlocked.",
         timestamp: new Date().toISOString(),
         color: 0x000080
     }
 
     try {
-        await channel.editPermission(role.id, {deny: BigInt(1 << 11), type: OverwriteTypes.ROLE});
-        await channel.editPermission(bot.user.id, {allow: BigInt(1 << 11), type: OverwriteTypes.MEMBER});
-        await interaction.createMessage({content: `Locked Down ${channel.name}`, flags: 64});
+        await channel.editPermission(role.id, {allow: BigInt(1 << 11), type: OverwriteTypes.ROLE});
+        await interaction.createMessage({content: `Unlocked ${channel.name}`, flags: 64});
         await channel.createMessage({embeds: [embed]});
     } catch (e) {
-        await interaction.createMessage({content: "Unable to lock, either due to missing perms or invalid channel type."});
+        await interaction.createMessage({content: "Unable to unlock, either due to missing perms or invalid channel type."});
         console.error(e);
     }
 }
