@@ -9,5 +9,11 @@ export async function execute(interaction: ExtInteraction, bot: BotClient) {
     let durtime = new Date(duration);
     let reason = interaction.options[2] || "no reason provided";
     await mem.edit({communicationsDisabledUntil: durtime.toISOString(), reason: reason});
-    await interaction.createMessage({content: `User ${mem.mention} timed out until ${durtime.toUTCString()}`});
+    let embed = {
+        title: `${mem.username} Muted`,
+        description: `User is muted until ${durtime.toUTCString()}`,
+        color: 0xff0000,
+        timestamp: new Date().toISOString()
+    }
+    await interaction.createMessage({embeds: [embed]});
 }
