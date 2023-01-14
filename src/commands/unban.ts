@@ -7,9 +7,9 @@ export async function execute(interaction, bot) {
     let bans = await guild.getBans();
     let res = bans.find(b => b.user.id == user);
     if(!res)
-    return await interaction.createMessage({content: "Could not find that user! :(", flags: 64});
+    return await interaction.createMessage({content: "Could not find that user!", flags: 64});
     
     await guild.removeBan(user);
 
-    await interaction.createMessage({content: `${res.user.tag} unbanned! :3`});
+    await interaction.createMessage({content: `${res.user.tag} unbanned!`});
 }
