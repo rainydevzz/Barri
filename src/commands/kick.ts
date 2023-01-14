@@ -1,8 +1,7 @@
 import { ExtInteraction } from "../types/extinteraction";
-import { BotClient } from "../bot";
 
-export async function execute(interaction: ExtInteraction, bot: BotClient) {
-    let guild = bot.guilds.find(g => g.id == interaction.guildID);
+export async function execute(interaction: ExtInteraction) {
+    let guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
     let user = await guild.getMember(interaction.options[0]);
     let reason: string = interaction.options[1] || "no reason provided";
 

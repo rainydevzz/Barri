@@ -1,8 +1,7 @@
 import { ExtInteraction } from "../types/extinteraction";
-import { BotClient } from "../bot";
 
-export async function execute(interaction: ExtInteraction, bot: BotClient) {
-    let guild = bot.guilds.find(g => g.id == interaction.guildID);
+export async function execute(interaction: ExtInteraction) {
+    let guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
     let mem = guild.members.find(m => m.id == interaction.options[0]);
     let min = interaction.options[1];
     let duration = (min * 60000) + new Date().getTime();

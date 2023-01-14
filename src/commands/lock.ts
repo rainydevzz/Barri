@@ -1,10 +1,9 @@
 import { ExtInteraction } from "../types/extinteraction";
-import { BotClient } from "../bot";
 import { Guild, Role, OverwriteTypes, TextChannel } from "oceanic.js"
 
-export async function execute(interaction: ExtInteraction, bot: BotClient) {
-    const guild: Guild = bot.guilds.find(g => g.id == interaction.guildID);
-    const channel: TextChannel = bot.getChannel(interaction.options[0]);
+export async function execute(interaction: ExtInteraction) {
+    const guild: Guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
+    const channel: TextChannel = interaction.client.getChannel(interaction.options[0]);
     const role: Role = guild.roles.find(r => r.name == "@everyone");
 
     let embed = {
@@ -16,7 +15,7 @@ export async function execute(interaction: ExtInteraction, bot: BotClient) {
 
     try {
         await channel.editPermission(role.id, {deny: BigInt(1 << 11), type: OverwriteTypes.ROLE});
-        await channel.editPermission(bot.user.id, {allow: BigInt(1 << 11), type: OverwriteTypes.MEMBER});
+        await channel.editPermission(interaction.client.user.id, {allow: BigInt(1 << 11), type: OverwriteTypes.MEMBER});
         await interaction.createMessage({content: `Locked Down ${channel.name}`, flags: 64});
         await channel.createMessage({embeds: [embed]});
     } catch (e) {

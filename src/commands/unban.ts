@@ -1,9 +1,9 @@
 import { ExtInteraction } from "../types/extinteraction";
 import { BotClient } from "../bot";
 
-export async function execute(interaction, bot) {
+export async function execute(interaction: ExtInteraction) {
     let user = interaction.options[0];
-    let guild = bot.guilds.find(g => g.id == interaction.guildID);
+    let guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
     let bans = await guild.getBans();
     let res = bans.find(b => b.user.id == user);
     if(!res)

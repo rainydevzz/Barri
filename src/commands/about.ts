@@ -1,13 +1,12 @@
-import { CommandInteraction } from "oceanic.js";
-import { BotClient } from "../bot";
+import { ExtInteraction } from "../types/extinteraction";
 
-export async function execute(interaction: CommandInteraction, bot: BotClient): Promise<void> {
+export async function execute(interaction: ExtInteraction): Promise<void> {
     let embed = {
-        title: `About ${bot.user.username}`,
+        title: `About ${interaction.client.user.username}`,
         description: 'Hello! I am a moderation bot with several useful utilities. Run /help for more info!',
         color: 0x00008b,
         timestamp: new Date().toISOString(),
-        thumbnail: {url: bot.user.avatarURL("png")}
+        thumbnail: {url: interaction.client.user.avatarURL("png")}
     }
 
     await interaction.createMessage({embeds: [embed]});
