@@ -4,7 +4,7 @@ import { BotClient } from "../bot";
 export async function execute(interaction: ExtInteraction, bot: BotClient) {
     let guild = bot.guilds.find(g => g.id == interaction.guildID);
     let user = await guild.getMember(interaction.options[0]);
-    let reason;
+    let reason: string;
     if(!interaction.options[1]) {
         reason = "none provided";
     } else {
