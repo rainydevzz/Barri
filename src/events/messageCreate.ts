@@ -17,7 +17,7 @@ export async function execute(bot: BotClient, msg: Message) {
     }
 
     await bot.checkSpam(msg);
-    console.log(bot.spamCache.get(msg.guildID));
+    
 }
 
 export const name = 'messageCreate';

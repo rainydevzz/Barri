@@ -131,6 +131,126 @@ const commands: Array<any> = [
                 required: true
             }
         ]
+    },
+    {
+        name: 'warns',
+        description: 'warn commands',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'setup',
+                description: 'Setup Warn System',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'mutelimit',
+                        description: 'warn threshold for muting',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: false
+                    },
+                    {
+                        name: 'kicklimit',
+                        description: 'warn threshold for kicking',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: false
+                    },
+                    {
+                        name: 'banlimit',
+                        description: 'warn threshold for banning',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: false
+                    },
+                    {
+                        name: 'onspam',
+                        description: 'warn on antispam detection',
+                        type: ApplicationCommandOptionTypes.BOOLEAN,
+                        required: false
+                    },
+                    {
+                        name: 'muteduration',
+                        description: 'duration for mute',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: false
+                    }
+                ]
+            },
+            {
+                name: 'add',
+                description: 'Warn Someone',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'user',
+                        description: 'user to warn',
+                        type: ApplicationCommandOptionTypes.USER,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'remove',
+                description: 'remove a warn',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'user',
+                        description: 'user to remove warn from',
+                        type: ApplicationCommandOptionTypes.USER,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'reset',
+                description: 'reset warns for someone',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'user',
+                        description: 'user to reset warns',
+                        type: ApplicationCommandOptionTypes.USER,
+                        required: true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        name: 'antispam',
+        description: 'antispam commands',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'setup',
+                description: 'setup antispam',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'messagecount',
+                        description: 'message count before checking',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: true
+                    },
+                    {
+                        name: 'interval',
+                        description: 'time in seconds for message count limit',
+                        type: ApplicationCommandOptionTypes.NUMBER,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'reset',
+                description: 'reset antispam',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD
+            }
+        ]
     }
 ];
 

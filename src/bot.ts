@@ -1,4 +1,5 @@
 import { Client, Message } from 'oceanic.js';
+import { ExtInteraction } from './types/extinteraction';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
 import { owners } from "./cfg.json";
@@ -31,29 +32,121 @@ export class BotClient extends Client {
         }
     }
 
+    async altWarns(interaction: ExtInteraction, num: number, userID: string): Promise<void> {
+        const res = await this.db.warns.findMany({
+            where: {AND: {
+                guild: interaction.guildID,
+                user: userID
+            }}
+        });
+        if(res[0]) {
+            let sum = 0 + res[0].count;
+            if(sum < 0) {
+                await interaction.createMessage({content: "Warns cannot be negative."});
+            }
+            await this.db.warns.updateMany({where: {AND: {
+                    guild: interaction.guildID,
+                    user: userID
+                }},
+                data: {
+                    count: res[0].count + num
+                }
+            });
+        } else {
+            let sum = 0 + num;
+            if(sum < 0) {
+                await interaction.createMessage({content: "Warns cannot be negative."});
+            }
+            await this.db.warns.create({
+                data: {
+                    guild: interaction.guildID,
+                    user: userID,
+                    id: this.genString(),
+                    count: 0 + num
+                }
+            });
+        }
+    }
+
+    async checkWarns(interaction: ExtInteraction, userID: string): Promise<number> {
+        const res = await this.db.warns.findMany({
+            where: {AND: {
+                guild: interaction.guildID,
+                user: userID
+            }
+        }});
+        if(res[0]) {
+            return res[0].count;
+        } else {
+            return 0;
+        }
+    }
+
+    async checkPunish(interaction: ExtInteraction, userID: string): Promise<void> {
+        const res = await this.db.warnsys.findFirst({where: {guild: interaction.guildID}});
+        const warnres = await this.checkWarns(interaction, userID);
+        const user = this.guilds.find(g => g.id == interaction.guildID).members.find(u => u.id == userID);
+        const dur = new Date(new Date().getTime() + (res.duration * 60)).toISOString() || null;
+        if(res.mutelimit) {
+            if(res.mutelimit >= warnres) {
+                await user.edit({communicationDisabledUntil: dur});
+                let embed = {
+                    title: `${user.tag} has been muted until ${dur}`,
+                    color: 0x000088
+                }
+                await interaction.createMessage({embeds: [embed]});
+                return;
+            }
+        }
+        if(res.kicklimit) {
+            if(res.kicklimit >= warnres) {
+                await user.kick("Too many infractions");
+                let embed = {
+                    title: `${user.tag} has been kicked due to Automod.`,
+                    color: 0x000088
+                }
+                await interaction.createMessage({embeds: [embed]});
+                return;
+            }
+        }
+        if(res.banlimit) {
+            if(res.banlimit >= warnres) {
+                await user.ban({reason: "Too many infractions"});
+                let embed = {
+                    title: `${user.tag} has been banned due to Automod.`,
+                    color: 0x000088
+                }
+                await interaction.createMessage({embeds: [embed]});
+                return;
+            }
+        }
+    }
+
     async checkSpam(msg: Message): Promise<boolean> {
         let res = this.dbCache.get(msg.guildID);
-        if(!res || (res && new Date().getTime() - res.timestamp >= 90000)) {
+        if(!res || (res && new Date().getTime() - res.timestamp >= 180000)) { // checks if it's been over 3 minutes since last cache refresh or cache record doesn't exist
             let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
+            let onspam = (await this.db.warnsys.findFirst({where: {guild: msg.guildID}})).onspam;
+            if(onspam === undefined) onspam = false;
             if(!dbres) return false;
-            this.dbCache.set(msg.guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime()});
+            this.dbCache.set(msg.guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime(), onspam: onspam}); // updates cache
             res = this.dbCache.get(msg.guildID);
         }
         let uid = msg.author.id;
         let sres = this.spamCache.get(msg.guildID);
-        if(!sres) { this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; }
+        if(!sres) { this.spamCache.set(msg.guildID, [{[uid]: [{timestamp: msg.timestamp.getTime()}]}]); return false; } // sets user record in guild map value
         let ures = sres.find(u => u.hasOwnProperty(uid));
         if(!ures) {
-            sres.push({[uid]: [{timestamp: msg.timestamp.getTime()}]});
+            sres.push({[uid]: [{timestamp: msg.timestamp.getTime()}]}); // adds message record to user array
             return false;
         }
         ures = ures[uid];
         ures.push({timestamp: msg.timestamp.getTime()});
-        if(ures.length >= res.msgcount) {
+        if(ures.length >= res.msgcount) { // if threshold is reached for message count
             let dif = ures[res.msgcount - 1].timestamp - ures[0].timestamp;
             sres.find(u => u.hasOwnProperty(uid))[uid] = [];
             if(dif < res.interval) {
-                return true;
+                return true; // antispam rule broken
             } else {
                 return false;
             }
@@ -64,6 +157,11 @@ export class BotClient extends Client {
 
     isOwner(id: string): boolean {
         return owners.includes(id);
+    }
+
+    genString(): string {
+        const r = Math.random().toString(36).substring(2, 12);
+        return r;
     }
 
     getCommandsLength(): number {

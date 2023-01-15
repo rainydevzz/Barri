@@ -13,3 +13,19 @@ model antispam {
   messagecount Int?
   interval     Int?
 }
+
+model warnsys {
+  guild     String   @id
+  mutelimit Int?
+  kicklimit Int?
+  banlimit  Int?
+  onspam    Boolean?
+  duration  Int?
+}
+
+model warns {
+  id    String @id
+  user  String
+  guild String
+  count Int?
+}
