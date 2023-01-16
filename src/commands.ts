@@ -257,6 +257,23 @@ const commands: Array<any> = [
                 default_member_permissions: Permissions.MANAGE_GUILD
             }
         ]
+    },
+    {
+        name: 'admin',
+        description: 'bot owner commands',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'stats',
+                description: 'see resource stats of the bot',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND
+            },
+            {
+                name: 'kill',
+                description: 'kill the bot process.',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND
+            }
+        ]
     }
 ];
 
