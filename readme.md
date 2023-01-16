@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS warns (id TEXT PRIMARY KEY, user TEXT NOT NULL, guild
 CREATE TABLE IF NOT EXISTS warnsys (guild TEXT PRIMARY KEY, mutelimit INTEGER, kicklimit INTEGER, banlimit INTEGER, onspam BOOLEAN, duration INTEGER);
 ```
 
+This statement will create a schema that matches the details in `schema.prisma`.
+
 #### Config Files
 
 Navigate to `/src/example.cfg.json` and replace "BOT TOKEN HERE" with your bot token.\
