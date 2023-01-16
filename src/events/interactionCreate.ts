@@ -5,9 +5,9 @@ export async function execute(bot: BotClient, interaction: any): Promise<void> {
     if(interaction.type === InteractionTypes.APPLICATION_COMMAND) {
         try {
             interaction.options = bot.getOptions(interaction.data.options.raw);
-            let option: number;
+            let option = interaction.data.options.raw;
+            if(option[0]) { option = option[0].type };
             let cmdData: any;
-            if(interaction.options[0]) option = interaction.options[0].type;
             if(option == 1) {
                 cmdData = require(`../commands/subcommands/${interaction.data.name}/${interaction.data.options.raw[0].name}`);
                 await cmdData.execute(interaction, bot);

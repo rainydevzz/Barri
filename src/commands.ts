@@ -241,6 +241,12 @@ const commands: Array<any> = [
                         description: 'time in seconds for message count limit',
                         type: ApplicationCommandOptionTypes.NUMBER,
                         required: true
+                    },
+                    {
+                        name: 'setting',
+                        description: 'on or off?',
+                        type: ApplicationCommandOptionTypes.BOOLEAN,
+                        required: true
                     }
                 ]
             },

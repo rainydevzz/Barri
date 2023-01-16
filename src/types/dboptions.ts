@@ -3,4 +3,5 @@ export interface DBOPtions {
     interval: number
     timestamp: number
     onspam: boolean
+    setting: boolean
 }

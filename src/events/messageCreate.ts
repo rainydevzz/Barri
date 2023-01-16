@@ -16,8 +16,12 @@ export async function execute(bot: BotClient, msg: Message) {
         await msg.channel.createMessage({embeds: [embed]});
     }
 
-    await bot.checkSpam(msg);
-    
+    const r = await bot.checkSpam(msg);
+    if(r && bot.dbCache.get(msg.guildID).onspam) {
+        if(bot.isOwner(msg.author.id)) { return; }
+        await bot.altWarns(msg, 1, msg.author.id);
+        await bot.checkPunish(msg, msg.author.id);
+    }
 }
 
 export const name = 'messageCreate';
