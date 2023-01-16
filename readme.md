@@ -2,13 +2,12 @@
 
 **A Moderation Bot written in Typescript using the Oceanic Library.**
 
-**THIS PROJECT IS STILL IN DEVELOPMENT. Not all listed features have been implemented yet.**
-
 ## Features
 
 - Basic Moderation (kick, ban, timeout, etc.)
 - Robust Antispam
 - Customizable Settings
+- Warn System
 
 ## Setup
 
@@ -26,8 +25,13 @@ Knowledge of Typescript, Node.js, and the Oceanic library are *not* required.
 #### Database Setup
 
 You will need to set up a PostgreSQL database for the Antispam setup.\
-Once you have set that up, you can follow the SQL statement below to set up the table. (wip)\
-`CREATE TABLE IF NOT EXISTS antispam (guild TEXT PRIMARY KEY, messagecount INTEGER, interval INTEGER, setting BOOLEAN);`
+Once you have set that up, you can follow the SQL statement below to set up the table.
+
+```
+CREATE TABLE IF NOT EXISTS antispam (guild TEXT PRIMARY KEY, messagecount INTEGER, interval INTEGER, setting BOOLEAN);
+CREATE TABLE IF NOT EXISTS warns (id TEXT PRIMARY KEY, user TEXT NOT NULL, guild TEXT NOT NULL, count INTEGER);
+CREATE TABLE IF NOT EXISTS warnsys (guild TEXT PRIMARY KEY, mutelimit INTEGER, kicklimit INTEGER, banlimit INTEGER, onspam BOOLEAN, duration INTEGER);
+```
 
 #### Config Files
 
