@@ -18,7 +18,7 @@ export class BotClient extends Client {
 
     async syncCommands(): Promise<void> {
         await this.application.bulkEditGlobalCommands(commands);
-        console.log(`${this.getCommandsLength()} base commands synced!`);
+        console.log(`${this.getCommandsLength()} commands synced!`);
     }
 
     async initialize(): Promise<void> {
@@ -174,8 +174,9 @@ export class BotClient extends Client {
     getCommandsLength(): number {
         let total = commands.length;
         for(const c of commands) {
-            if(c.options && c.options[0] == 1) {
-                total += c.options.length - 1;
+            if(c.options && c.options[0].type == 1) {
+                total += c.options.length;
+                total--;
             }
         }
         return total;
