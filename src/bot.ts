@@ -40,7 +40,7 @@ export class BotClient extends Client {
             }}
         });
         if(res[0]) {
-            let sum = 0 + res[0].count;
+            let sum = num + res[0].count;
             if(sum < 0) {
                 return 1;
             }
@@ -86,39 +86,44 @@ export class BotClient extends Client {
         const res = await this.db.warnsys.findFirst({where: {guild: interaction.guildID}});
         const warnres = await this.checkWarns(interaction, userID);
         const user = this.guilds.find(g => g.id == interaction.guildID).members.find(u => u.id == userID);
-        const dur = new Date(new Date().getTime() + (res.duration)).toISOString() || null;
-        if(res.mutelimit) {
-            if(res.mutelimit >= warnres) {
-                await user.edit({communicationDisabledUntil: dur});
-                let embed = {
-                    title: `${user.tag} has been muted until ${dur}`,
-                    color: 0x000088
+        const dur = new Date(new Date().getTime() + (res.duration)) || null;
+        try {
+            if(res.mutelimit) {
+                if(res.mutelimit <= warnres) {
+                    await user.edit({communicationDisabledUntil: dur.toISOString()});
+                    let embed = {
+                        title: `${user.tag} has been muted until ${dur}`,
+                        color: 0x000088
+                    }
+                    await interaction.channel.createMessage({embeds: [embed]});
+                    return;
                 }
-                await interaction.channel.createMessage({embeds: [embed]});
-                return;
             }
-        }
-        if(res.kicklimit) {
-            if(res.kicklimit >= warnres) {
-                await user.kick("Too many infractions");
-                let embed = {
-                    title: `${user.tag} has been kicked due to Automod.`,
-                    color: 0x000088
+            if(res.kicklimit) {
+                if(res.kicklimit <= warnres) {
+                    await user.kick("Too many infractions");
+                    let embed = {
+                        title: `${user.tag} has been kicked due to Automod.`,
+                        color: 0x000088
+                    }
+                    await interaction.channel.createMessage({embeds: [embed]});
+                    return;
                 }
-                await interaction.channel.createMessage({embeds: [embed]});
-                return;
             }
-        }
-        if(res.banlimit) {
-            if(res.banlimit >= warnres) {
-                await user.ban({reason: "Too many infractions"});
-                let embed = {
-                    title: `${user.tag} has been banned due to Automod.`,
-                    color: 0x000088
+            if(res.banlimit) {
+                if(res.banlimit <= warnres) {
+                    await user.ban({reason: "Too many infractions"});
+                    let embed = {
+                        title: `${user.tag} has been banned due to Automod.`,
+                        color: 0x000088
+                    }
+                    await interaction.channel.createMessage({embeds: [embed]});
+                    return;
                 }
-                await interaction.channel.createMessage({embeds: [embed]});
-                return;
             }
+        } catch(e) {
+            await interaction.channel.createMessage({content: "Failed to complete action, likely due to missing permissions."});
+            return;
         }
         await interaction.channel.createMessage({content: `${interaction.author.mention} has been warned automatically.`});
     }
