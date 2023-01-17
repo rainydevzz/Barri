@@ -205,13 +205,19 @@ const commands: Array<any> = [
             },
             {
                 name: 'reset',
-                description: 'reset warns for someone',
+                description: 'reset warns settings',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+            },
+            {
+                name: 'resetwarns',
+                description: 'reset warns for a user',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
                 default_member_permissions: Permissions.MANAGE_GUILD,
                 options: [
                     {
                         name: 'user',
-                        description: 'user to reset warns',
+                        description: 'user to reset warns for',
                         type: ApplicationCommandOptionTypes.USER,
                         required: true
                     }

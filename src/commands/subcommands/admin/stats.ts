@@ -19,6 +19,11 @@ export async function execute(interaction: ExtInteraction) {
                     value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
                     inline: true
                 },
+                {
+                    name: "CPU Usage",
+                    value: `${(process.cpuUsage().user / 1024 / 1024).toFixed(2)}%`,
+                    inline: true
+                }
             ],
             color: 0xadd8e6,
             timestamp: new Date().toISOString()
