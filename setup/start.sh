@@ -1,1 +1,1 @@
-cd ../src && npx ts-node --esm index.ts
+cd ../src && npx ts-node --esm --transpileOnly index.ts

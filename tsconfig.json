@@ -5,6 +5,16 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "noImplicitUseStrict": true
-    }
+        "noImplicitUseStrict": true,
+        "outDir": "./target",
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }

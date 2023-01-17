@@ -272,6 +272,19 @@ const commands: Array<any> = [
                 name: 'kill',
                 description: 'kill the bot process.',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND
+            },
+            {
+                name: 'eval',
+                description: 'evaluate some JS code',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'code',
+                        description: 'code to eval',
+                        type: ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
             }
         ]
     }
