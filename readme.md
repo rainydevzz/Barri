@@ -5,10 +5,10 @@
 ## Features
 
 - Basic Moderation (kick, ban, timeout, etc.)
-- Robust Antispam
-- Customizable Settings
-- Warn System
-- Bot Admin Commands
+- Robust Antispam (with message info and database caching for faster operations)
+- Customizable Settings (warn and antispam system)
+- Warn System (with Auto-Punishing)
+- Bot Admin Commands (eval, system stats, kill process)
 
 ## Setup
 
