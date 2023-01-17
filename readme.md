@@ -8,6 +8,7 @@
 - Robust Antispam
 - Customizable Settings
 - Warn System
+- Bot Admin Commands
 
 ## Setup
 
