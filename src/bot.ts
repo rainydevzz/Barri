@@ -89,7 +89,7 @@ export class BotClient extends Client {
         const dur = new Date(new Date().getTime() + (res.duration)) || null;
         try {
             if(res.mutelimit) {
-                if(res.mutelimit <= warnres) {
+                if(res.mutelimit == warnres) {
                     await user.edit({communicationDisabledUntil: dur.toISOString()});
                     let embed = {
                         title: `${user.tag} has been muted until ${dur}`,
@@ -100,7 +100,7 @@ export class BotClient extends Client {
                 }
             }
             if(res.kicklimit) {
-                if(res.kicklimit <= warnres) {
+                if(res.kicklimit == warnres) {
                     await user.kick("Too many infractions");
                     let embed = {
                         title: `${user.tag} has been kicked due to Automod.`,
@@ -111,7 +111,7 @@ export class BotClient extends Client {
                 }
             }
             if(res.banlimit) {
-                if(res.banlimit <= warnres) {
+                if(res.banlimit == warnres) {
                     await user.ban({reason: "Too many infractions"});
                     let embed = {
                         title: `${user.tag} has been banned due to Automod.`,

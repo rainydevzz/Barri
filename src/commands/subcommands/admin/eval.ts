@@ -1,4 +1,5 @@
 import { ExtInteraction } from "../../../types/extinteraction";
+import { token } from '../../../cfg.json';
 
 export async function execute(interaction: ExtInteraction) {
     if(!interaction.client.isOwner(interaction.user.id)) {
@@ -11,8 +12,8 @@ export async function execute(interaction: ExtInteraction) {
     
 
         if(res instanceof String) {
-            if(res.includes(process.env.TOKEN)) {
-                res.replace(process.env.TOKEN, "TOKEN HIDDEN");
+            if(res.includes(token)) {
+                res.replace(token, "TOKEN HIDDEN");
             }
         }
 
