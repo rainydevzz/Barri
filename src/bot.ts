@@ -2,7 +2,6 @@ import { Client, Message } from 'oceanic.js';
 import { ExtInteraction } from './types/extinteraction';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
-import { owners } from "./cfg.json";
 import commands from './commands';
 import client from './prisma/client';
 import path from 'path';
@@ -163,6 +162,7 @@ export class BotClient extends Client {
     }
 
     isOwner(id: string): boolean {
+        const owners = process.env.OWNERS.split(' ');
         return owners.includes(id);
     }
 

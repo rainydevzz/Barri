@@ -1,7 +1,9 @@
 import { BotClient } from './bot';
-import { token } from './cfg.json';
+import dotenv from 'dotenv';
 
-export const bot = new BotClient({auth: `Bot ${token}`});
+dotenv.config()
+
+export const bot = new BotClient({auth: process.env.TOKEN});
 bot.startEventHandler();
 
 process.on('uncaughtException', (err) => {
