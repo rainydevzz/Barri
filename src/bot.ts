@@ -77,6 +77,14 @@ export class BotClient extends Client {
         if(res[0]) {
             return res[0].count;
         } else {
+            await this.db.warns.create({
+                data: {
+                    guild: interaction.guildID,
+                    user: userID,
+                    id: this.genString(),
+                    count: 0
+                }
+            });
             return 0;
         }
     }
@@ -167,7 +175,7 @@ export class BotClient extends Client {
     }
 
     genString(): string {
-        const r = Math.random().toString(36).substring(2, 12);
+        const r = Math.random().toString(36).substring(2, 18);
         return r;
     }
 
