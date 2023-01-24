@@ -6,6 +6,7 @@ export async function execute(interaction: ExtInteraction) {
         await interaction.createMessage({content: "This command is for bot owners only.", flags: 64});
         return;
     } else {
+        let shardID = interaction.guild.shard.id || "not cached";
         let embed = {
             title: `Bot stats for ${interaction.client.user.username}`,
             fields: [
@@ -27,6 +28,16 @@ export async function execute(interaction: ExtInteraction) {
                 {
                     name: "Guild Count",
                     value: `${interaction.client.guilds.toArray().length}`,
+                    inline: true
+                },
+                {
+                    name: "Shard Count",
+                    value: `${interaction.client.shards.toArray().length}`,
+                    inline: true
+                },
+                {
+                    name: "Guild Shard ID",
+                    value: `${shardID}`,
                     inline: true
                 }
             ],
