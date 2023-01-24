@@ -222,6 +222,19 @@ const commands: Array<any> = [
                         required: true
                     }
                 ]
+            },
+            {
+                name: 'view',
+                description: 'view warns for a user',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'user',
+                        description: 'user to view warns for',
+                        type: ApplicationCommandOptionTypes.USER,
+                        required: true
+                    }
+                ]
             }
         ]
     },

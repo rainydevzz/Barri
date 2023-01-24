@@ -23,9 +23,15 @@ export async function execute(interaction: ExtInteraction) {
                     name: "CPU Usage",
                     value: `${(process.cpuUsage().user / 1024 / 1024).toFixed(2)}%`,
                     inline: true
+                },
+                {
+                    name: "Guild Count",
+                    value: `${interaction.client.guilds.toArray().length}`,
+                    inline: true
                 }
             ],
             color: 0xadd8e6,
+            thumbnail: {url: interaction.client.user.avatarURL("png")},
             timestamp: new Date().toISOString()
         }
         await interaction.createMessage({embeds: [embed]});
