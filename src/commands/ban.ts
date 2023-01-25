@@ -2,9 +2,9 @@ import { ExtInteraction } from "../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction) {
     let guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
-    let user = await guild.getMember(interaction.options[0]);
+    let user = await guild.getMember(interaction.options.get('user'));
     let reason: string;
-    if(!interaction.options[1]) {
+    if(!interaction.options.get('reason')) {
         reason = "none provided";
     } else {
         reason = interaction.options[1];

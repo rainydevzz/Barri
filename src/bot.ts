@@ -190,20 +190,20 @@ export class BotClient extends Client {
         return total;
     }
 
-    getOptions(options: Array<any>): Array<any> {
+    getOptions(options: Array<any>): Map<string, string> {
         // options will typically be interaction.data.options.raw
-        if(!options[0]) { return [] }; // no options
-        let optionArr = [];
+        if(!options[0]) { return new Map() }; // no options
+        let optionMap: Map<string, string> = new Map();
         if(options[0].type == 1) { // for subcommands
             for(const o of options[0].options) {
-                optionArr.push(o.value);
+                optionMap.set(o.name, o.value);
             }
         } else { // for base commands
             for (const o of options) {
-                optionArr.push(o.value);
+                optionMap.set(o.name, o.value);
             }
         }
-        return optionArr;
+        return optionMap;
     }
 
     startEventHandler() {   

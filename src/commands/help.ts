@@ -3,7 +3,7 @@ import commands from "../commands";
 import { ExtInteraction } from "../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction): Promise<void> {
-    if(!interaction.options[0]) {
+    if(!interaction.options.get('command')) {
         let descStr = "";
         for(const c of commands) {
             descStr += `**${c.name}** - ${c.description}\n`;
@@ -17,7 +17,7 @@ export async function execute(interaction: ExtInteraction): Promise<void> {
         await interaction.createMessage({embeds: [embed]});
         return;
     } else {
-        let opt = interaction.options[0];
+        let opt = interaction.options.get('command');
         let opt2 = commands.find(c => c.name == opt);
         if (!opt2) {
             await interaction.createMessage({content: "no command found by that name!"});

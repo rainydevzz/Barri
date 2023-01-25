@@ -3,7 +3,7 @@ import { Guild, Role, OverwriteTypes, TextChannel } from "oceanic.js"
 
 export async function execute(interaction: ExtInteraction) {
     const guild: Guild = interaction.client.guilds.find(g => g.id == interaction.guildID);
-    const channel: TextChannel = interaction.client.getChannel(interaction.options[0]);
+    const channel: TextChannel = interaction.client.getChannel(interaction.options.get('channel'));
     const role: Role = guild.roles.find(r => r.name == "@everyone");
 
     let embed = {

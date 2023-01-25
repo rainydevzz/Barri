@@ -1,7 +1,7 @@
 import { ExtInteraction } from "../../../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction) {
-    const r = await interaction.client.altWarns(interaction, 1, interaction.options[0]);
+    const r = await interaction.client.altWarns(interaction, 1, interaction.options.get('user'));
     if(r == 1) {
         await interaction.createMessage({content: "Warns cannot be negative."});
         return;

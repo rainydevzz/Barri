@@ -7,7 +7,7 @@ export async function execute(interaction: ExtInteraction) {
     }
 
     try {    
-        const res = eval(interaction.options[0]);
+        const res = eval(interaction.options.get('code'));
     
 
         if(res instanceof String) {

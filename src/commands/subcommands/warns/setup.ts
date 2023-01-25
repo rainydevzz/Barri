@@ -1,11 +1,11 @@
 import { ExtInteraction } from "../../../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction) {
-    const ml = interaction.options[0];
-    const kl = interaction.options[1];
-    const bl = interaction.options[2];
-    const os = interaction.options[3];
-    const du = interaction.options[4];
+    const ml = interaction.options.get('mutelimit') || -1;
+    const kl = interaction.options.get('kicklimit') || -1;
+    const bl = interaction.options.get('banlimit') || -1;
+    const os = interaction.options.get('onspam') || false;
+    let du = interaction.options.get('muteduration') || -1;
     await interaction.client.db.warnsys.upsert({
         where: {guild: interaction.guildID},
         update: {
@@ -24,6 +24,8 @@ export async function execute(interaction: ExtInteraction) {
             duration: du * 60000
         }
     });
+
+    if(du == -1) du = "not set";
 
     let embed = {
         title: "Setup Complete",
@@ -50,6 +52,12 @@ export async function execute(interaction: ExtInteraction) {
             }
         ],
         color: 0x000088
+    }
+
+    for(const f of embed.fields) {
+        if(f.value == -1) {
+            f.value = "not set";
+        }
     }
 
     await interaction.createMessage({embeds: [embed]})

@@ -1,7 +1,7 @@
 import { ExtInteraction } from "../../../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction) {
-    const member = interaction.client.guilds.find(g => g.id == interaction.guildID).members.find(m => m.id == interaction.options[0]);
+    const member = interaction.client.guilds.find(g => g.id == interaction.guildID).members.find(m => m.id == interaction.options.get('user'));
     const res = await interaction.client.checkWarns(interaction, interaction.options[0]);
     let embed = {
         title: `Warns for ${member.tag}`,
