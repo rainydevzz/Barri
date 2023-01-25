@@ -40,7 +40,7 @@ export async function execute(interaction: ExtInteraction): Promise<void> {
             let descStr = "";
             if(opt2.options !== undefined) {
                 for(const c of opt2.options) {
-                    descStr += `**${c.name}** - ${c.description}`;
+                    descStr += `**${c.name}** - ${c.description}\n`;
                 }
             } else {
                 descStr = "No Options";
