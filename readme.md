@@ -23,9 +23,3 @@ If you're interested in learning more about the tools this bot utilizes, check t
 [Prisma](https://www.prisma.io/) - ORM the bot uses to interact with the database\
 [PostgreSQL](https://www.postgresql.org/) - Database the bot uses\
 [Typescript](https://www.typescriptlang.org/) - Language the bot is written in
-
-#### Some Extra Stuff (Not Sponsored)
-
-[Railway](https://www.railway.app) (Cheap Database and Bot hosting, first 5 dollars each month is free when providing a Credit Card)\
-[Linode](https://www.linode.com/) (More Cheap Hosting)\
-[OVHCloud](https://us.ovhcloud.com/) (Even More Cheap Hosting)
