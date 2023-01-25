@@ -2,6 +2,7 @@ import { Client, Message } from 'oceanic.js';
 import { ExtInteraction } from './types/extinteraction';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
+import { IgnoreOptions } from './types/ignoreoptions';
 import commands from './commands';
 import client from './prisma/client';
 import path from 'path';
@@ -13,6 +14,7 @@ const eventFiles = fs.readdirSync(eventPath).filter(f => f.endsWith('.ts'));
 export class BotClient extends Client {
     spamCache: Map<String, Array<any>> = new Map();
     dbCache: Map<String, DBOPtions> = new Map();
+    ignoreCache: Map<String, IgnoreOptions> = new Map();
     db: PrismaClient = client;
 
     async syncCommands(): Promise<void> {
@@ -65,6 +67,28 @@ export class BotClient extends Client {
                 }
             });
         }
+    }
+
+    async checkIgnore(interaction: Message | ExtInteraction): Promise<boolean> {
+        let res = this.ignoreCache.get(interaction.guildID);
+        if(!res || (res && new Date().getTime() - res.timestamp > 120000)) {
+            const dbres = await this.db.ignore.findFirst({
+                where: { guild: interaction.guildID }
+            });
+            if(!dbres) return false;
+            let ignoreArr = [];
+            for(const r of dbres) {
+                ignoreArr.push(r.id);
+            }
+            this.ignoreCache.set(interaction.guildID, {timestamp: new Date().getTime(), ignoreArr});
+            res = this.ignoreCache.get(interaction.guildID);
+        }
+        const roleCheck = res.ids.some(r => interaction.user.roles.includes(r.id));
+        if(
+            res.ids.includes(interaction.user.id) ||
+            res.ids.includes(interaction.channelID) ||
+            roleCheck
+        ) { return true; } else { return false; }
     }
 
     async checkWarns(interaction: ExtInteraction | Message, userID: string): Promise<number> {
@@ -136,6 +160,8 @@ export class BotClient extends Client {
     }
 
     async checkSpam(msg: Message): Promise<boolean> {
+        const check = await this.checkIgnore(msg);
+        if(!check) return false;
         let res = this.dbCache.get(msg.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp >= 120000)) { // checks if it's been over 2 minutes since last cache refresh or cache record doesn't exist
             let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
@@ -191,7 +217,7 @@ export class BotClient extends Client {
         return total;
     }
 
-    getOptions(options: Array<any>): Map<string, string> {
+    getOptions(options: Array<any>): Map<string, any> {
         // options will typically be interaction.data.options.raw
         if(!options[0]) { return new Map() }; // no options
         let optionMap: Map<string, string> = new Map();
