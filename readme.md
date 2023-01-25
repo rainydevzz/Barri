@@ -2,6 +2,8 @@
 
 **A Moderation Bot written in Typescript using the Oceanic Library.**
 
+**You can find the official instance [here!](https://shorturl.at/rxRY3)**
+
 ## Features
 
 - Basic Moderation (kick, ban, timeout, etc.)
@@ -14,8 +16,6 @@
 
 There are several videos and articles online for setting up a bot account, so I will not go over that here.\
 Feel free to continue once you have set up a bot account and have its token ready.
-
-**You can find the official instance [here!](https://shorturl.at/rxRY3)**
 
 #### Requirements
 
