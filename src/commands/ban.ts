@@ -7,7 +7,7 @@ export async function execute(interaction: ExtInteraction) {
     if(!interaction.options.get('reason')) {
         reason = "none provided";
     } else {
-        reason = interaction.options[1];
+        reason = interaction.options.get('reason');
     };
 
     await user.ban({reason: reason});
