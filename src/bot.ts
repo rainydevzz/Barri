@@ -139,8 +139,7 @@ export class BotClient extends Client {
         let res = this.dbCache.get(msg.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp >= 120000)) { // checks if it's been over 2 minutes since last cache refresh or cache record doesn't exist
             let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
-            let onspam = (await this.db.warnsys.findFirst({where: {guild: msg.guildID}})).onspam;
-            if(onspam === undefined) onspam = false;
+            let onspam = (await this.db.warnsys.findFirst({where: {guild: msg.guildID}})).onspam || false;
             if(!dbres) return false;
             this.dbCache.set(msg.guildID, {interval: dbres.interval, msgcount: dbres.messagecount, timestamp: new Date().getTime(), onspam: onspam, setting: dbres.setting}); // updates cache
             res = this.dbCache.get(msg.guildID);
