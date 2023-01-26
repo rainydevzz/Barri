@@ -69,23 +69,23 @@ export class BotClient extends Client {
         }
     }
 
-    async checkIgnore(interaction: Message | ExtInteraction): Promise<boolean> {
+    async checkIgnore(interaction: Message): Promise<boolean> {
         let res = this.ignoreCache.get(interaction.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp > 120000)) {
-            const dbres = await this.db.ignore.findFirst({
+            const dbres = await this.db.ignoretable.findMany({
                 where: { guild: interaction.guildID }
             });
             if(!dbres) return false;
-            let ignoreArr = [];
+            let ignoreArr: Array<string> = [];
             for(const r of dbres) {
                 ignoreArr.push(r.id);
             }
-            this.ignoreCache.set(interaction.guildID, {timestamp: new Date().getTime(), ignoreArr});
+            this.ignoreCache.set(interaction.guildID, {timestamp: new Date().getTime(), ids: ignoreArr});
             res = this.ignoreCache.get(interaction.guildID);
         }
-        const roleCheck = res.ids.some(r => interaction.user.roles.includes(r.id));
+        const roleCheck = res.ids.some(r => interaction.member.roles.includes(r));
         if(
-            res.ids.includes(interaction.user.id) ||
+            res.ids.includes(interaction.author.id) ||
             res.ids.includes(interaction.channelID) ||
             roleCheck
         ) { return true; } else { return false; }
@@ -161,6 +161,7 @@ export class BotClient extends Client {
 
     async checkSpam(msg: Message): Promise<boolean> {
         const check = await this.checkIgnore(msg);
+        console.log(check);
         if(!check) return false;
         let res = this.dbCache.get(msg.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp >= 120000)) { // checks if it's been over 2 minutes since last cache refresh or cache record doesn't exist

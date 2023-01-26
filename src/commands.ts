@@ -274,6 +274,34 @@ const commands: Array<any> = [
                 description: 'reset antispam',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
                 default_member_permissions: Permissions.MANAGE_GUILD
+            },
+            {
+                name: 'addexception',
+                description: 'add an exception to antispam',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'id',
+                        description: 'id of user, channel, or role',
+                        type: ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'removeexception',
+                description: 'remove an exception from antispam',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                default_member_permissions: Permissions.MANAGE_GUILD,
+                options: [
+                    {
+                        name: 'id',
+                        description: 'id of user, channel, or role',
+                        type: ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
             }
         ]
     },

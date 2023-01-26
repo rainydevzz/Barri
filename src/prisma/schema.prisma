@@ -29,3 +29,8 @@ model warns {
   guild String
   count Int?
 }
+
+model ignoretable {
+  id    String @id
+  guild String
+}
