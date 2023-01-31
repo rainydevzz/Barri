@@ -10,11 +10,15 @@ export async function execute(interaction: ExtInteraction): Promise<void> {
         fields: [
             {
                 name: 'Invite',
-                value: "[here](https://discord.com/api/oauth2/authorize?client_id=1020163915189067816&permissions=1376537078806&scope=bot%20applications.commands)"
+                value: "[Here](https://discord.com/api/oauth2/authorize?client_id=1020163915189067816&permissions=1376537078806&scope=bot%20applications.commands)"
             },
             {
                 name: 'Support',
-                value: "[here](https://discord.gg/q3z4EyWBNe)"
+                value: "[Here](https://discord.gg/q3z4EyWBNe)"
+            },
+            {
+                name : 'Top.gg (Vote Here!)',
+                value: "[Here](https://top.gg/bot/1020163915189067816)"
             }
         ]
     }
