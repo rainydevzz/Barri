@@ -284,7 +284,7 @@ const commands: Array<any> = [
                     {
                         name: 'id',
                         description: 'id of user, channel, or role',
-                        type: ApplicationCommandOptionTypes.STRING,
+                        type: ApplicationCommandOptionTypes.MENTIONABLE,
                         required: true
                     }
                 ]
@@ -298,7 +298,7 @@ const commands: Array<any> = [
                     {
                         name: 'id',
                         description: 'id of user, channel, or role',
-                        type: ApplicationCommandOptionTypes.STRING,
+                        type: ApplicationCommandOptionTypes.MENTIONABLE,
                         required: true
                     }
                 ]
