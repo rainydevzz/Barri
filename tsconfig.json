@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
         "target": "ES2022",
-        "module": "commonjs",
+        "module": "CommonJS",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "noImplicitUseStrict": true,
-        "outDir": "./target",
+        "outDir": "dist",
+        "noEmit": false,
+        "skipLibCheck": true,
+        "baseUrl": "./",
         "types": [
             "node"
         ],
@@ -14,6 +17,12 @@
             "node_modules/@types"
         ]
     },
+    "include": [
+        "./*.ts",
+        "./*",
+        "*",
+        "./"
+    ],
     "exclude": [
         "node_modules"
     ]

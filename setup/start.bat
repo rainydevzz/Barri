@@ -1,1 +1,1 @@
-cd ../src & npx ts-node --esm --transpileOnly index.ts
+cd .. & tsc & node dist/index.js

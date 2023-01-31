@@ -9,7 +9,7 @@ import path from 'path';
 import fs from 'fs';
 
 const eventPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventPath).filter(f => f.endsWith('.ts'));
+const eventFiles = fs.readdirSync(eventPath);
 
 export class BotClient extends Client {
     spamCache: Map<String, Array<any>> = new Map();
