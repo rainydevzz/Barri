@@ -316,11 +316,6 @@ const commands = [
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND
             },
             {
-                name: 'kill',
-                description: 'kill the bot process.',
-                type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND
-            },
-            {
                 name: 'eval',
                 description: 'evaluate some JS code',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
