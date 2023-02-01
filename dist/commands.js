@@ -59,7 +59,7 @@ const commands = [
         default_member_permissions: oceanic_js_1.Permissions.MODERATE_MEMBERS,
         options: [
             {
-                name: 'member',
+                name: 'user',
                 description: 'member to timeout',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.USER,
                 required: true

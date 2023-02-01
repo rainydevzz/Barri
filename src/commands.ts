@@ -59,7 +59,7 @@ const commands: Array<any> = [
         default_member_permissions: Permissions.MODERATE_MEMBERS,
         options: [
             {
-                name: 'member',
+                name: 'user',
                 description: 'member to timeout',
                 type: ApplicationCommandOptionTypes.USER,
                 required: true
