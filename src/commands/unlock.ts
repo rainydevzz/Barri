@@ -1,5 +1,4 @@
 import { ExtInteraction } from "../types/extinteraction";
-import { BotClient } from "../bot";
 import { Guild, Role, OverwriteTypes, TextChannel } from "oceanic.js"
 
 export async function execute(interaction: ExtInteraction) {

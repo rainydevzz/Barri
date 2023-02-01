@@ -16,9 +16,15 @@ export async function execute(bot: BotClient, interaction: any): Promise<void> {
             cmdData = require(`../commands/${interaction.data.name}`);
             await cmdData.execute(interaction, bot); 
         } catch (err) {
-            await interaction.createMessage({content: "Uh oh! Something went wrong!", flags: 64});
-            console.error(err);
-            return;
+            try {
+                console.error(err);
+                await interaction.createMessage({content: "Uh oh! Something went wrong!", flags: 64});
+                return;
+            } catch (err) {
+                console.error(err);
+                await interaction.createFollowup({content: "Uh Oh! Something went wrong!", flags: 64});
+                return;
+            }
         }
     }
 }

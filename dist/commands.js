@@ -79,6 +79,12 @@ const commands = [
         ]
     },
     {
+        name: 'viewsettings',
+        description: 'view settings for this guild',
+        type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: oceanic_js_1.Permissions.MANAGE_GUILD
+    },
+    {
         name: "ban",
         description: "ban a user!",
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,

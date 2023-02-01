@@ -79,6 +79,12 @@ const commands: Array<any> = [
         ]
     },
     {
+        name: 'viewsettings',
+        description: 'view settings for this guild',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        default_member_permissions: Permissions.MANAGE_GUILD
+    },
+    {
         name: "ban",
         description: "ban a user!",
         type: ApplicationCommandTypes.CHAT_INPUT,
