@@ -1,6 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = void 0;
 async function execute(interaction) {
+    await interaction.defer();
     const ml = interaction.options.get('mutelimit') || -1;
     const kl = interaction.options.get('kicklimit') || -1;
     const bl = interaction.options.get('banlimit') || -1;
@@ -57,6 +58,6 @@ async function execute(interaction) {
             f.value = "not set";
         }
     }
-    await interaction.createMessage({ embeds: [embed] });
+    await interaction.createFollowup({ embeds: [embed] });
 }
 exports.execute = execute;
