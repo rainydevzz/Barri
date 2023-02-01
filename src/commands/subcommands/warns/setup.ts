@@ -1,6 +1,7 @@
 import { ExtInteraction } from "../../../types/extinteraction";
 
 export async function execute(interaction: ExtInteraction) {
+    await interaction.defer();
     const ml = interaction.options.get('mutelimit') || -1;
     const kl = interaction.options.get('kicklimit') || -1;
     const bl = interaction.options.get('banlimit') || -1;
@@ -60,5 +61,5 @@ export async function execute(interaction: ExtInteraction) {
         }
     }
 
-    await interaction.createMessage({embeds: [embed]})
+    await interaction.createFollowup({embeds: [embed]})
 }
