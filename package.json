@@ -12,7 +12,8 @@
     "@prisma/client": "^4.8.1",
     "dotenv": "^16.0.3",
     "oceanic.js": "^1.4.1",
-    "prisma": "^4.8.1"
+    "prisma": "^4.8.1",
+    "tsc": "^2.0.4"
   },
   "devDependencies": {
     "@types/node": "^18.11.18"
