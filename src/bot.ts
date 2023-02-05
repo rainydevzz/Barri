@@ -1,4 +1,4 @@
-import { Client, Message } from 'oceanic.js';
+import { Client, Message, BotActivity, Guild } from 'oceanic.js';
 import { ExtInteraction } from './types/extinteraction';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
@@ -30,6 +30,15 @@ export class BotClient extends Client {
             console.log("Setup complete!");
         } catch (e) {
             console.error("Uh oh, something went wrong. Error:", e);
+        }
+    }
+
+    async cycleStatus(activities: BotActivity[]) {
+        let i = 0;
+        while(true) {
+            await this.editStatus('online', [activities[i % activities.length]]);
+            i++;
+            await new Promise((res) => {setTimeout(res, 20000)});
         }
     }
 
@@ -215,6 +224,20 @@ export class BotClient extends Client {
             }
         }
         return total;
+    }
+
+    getMemberLength() {
+        let i: any = 0;
+        for(const gu of this.guilds) {
+            if(gu instanceof Guild) {
+                i += gu.memberCount;
+            } else if(gu instanceof String){
+                let s = gu.toString();
+                const guild = this.guilds.find(g => g.id == s);
+                i += guild.memberCount;
+            }
+        }
+        return i;
     }
 
     getOptions(options: Array<any>): Map<string, any> {

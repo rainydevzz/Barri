@@ -30,6 +30,14 @@ class BotClient extends oceanic_js_1.Client {
             console.error("Uh oh, something went wrong. Error:", e);
         }
     }
+    async cycleStatus(activities) {
+        let i = 0;
+        while (true) {
+            await this.editStatus('online', [activities[i % activities.length]]);
+            i++;
+            await new Promise((res) => { setTimeout(res, 20000); });
+        }
+    }
     async altWarns(interaction, num, userID) {
         const res = await this.db.warns.findMany({
             where: { AND: {
@@ -228,6 +236,20 @@ class BotClient extends oceanic_js_1.Client {
             }
         }
         return total;
+    }
+    getMemberLength() {
+        let i = 0;
+        for (const gu of this.guilds) {
+            if (gu instanceof oceanic_js_1.Guild) {
+                i += gu.memberCount;
+            }
+            else if (gu instanceof String) {
+                let s = gu.toString();
+                const guild = this.guilds.find(g => g.id == s);
+                i += guild.memberCount;
+            }
+        }
+        return i;
     }
     getOptions(options) {
         // options will typically be interaction.data.options.raw
