@@ -338,6 +338,19 @@ const commands: Array<any> = [
                 name: 'guilds',
                 description: 'see bot guilds',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND
+            },
+            {
+                name: 'getguild',
+                description: 'get guild',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'guild',
+                        description: 'guild id',
+                        type: ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
             }
         ]
     }

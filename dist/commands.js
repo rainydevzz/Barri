@@ -338,6 +338,19 @@ const commands = [
                 name: 'guilds',
                 description: 'see bot guilds',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND
+            },
+            {
+                name: 'getguild',
+                description: 'get guild',
+                type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'guild',
+                        description: 'guild id',
+                        type: oceanic_js_1.ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
             }
         ]
     }
