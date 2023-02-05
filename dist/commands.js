@@ -333,6 +333,11 @@ const commands = [
                         required: true
                     }
                 ]
+            },
+            {
+                name: 'guilds',
+                description: 'see bot guilds',
+                type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND
             }
         ]
     }

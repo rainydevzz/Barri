@@ -333,6 +333,11 @@ const commands: Array<any> = [
                         required: true
                     }
                 ]
+            },
+            {
+                name: 'guilds',
+                description: 'see bot guilds',
+                type: ApplicationCommandOptionTypes.SUB_COMMAND
             }
         ]
     }
