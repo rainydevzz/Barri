@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i & cd src & npx prisma db pull & npx prisma generate & cd .. & tsc"
+    "build": "npm i & cd src & npx prisma db pull & npx prisma generate & cd .. & tsc",
+    "build:debug": "tsc"
   },
   "author": "",
   "license": "ISC",

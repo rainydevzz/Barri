@@ -227,15 +227,9 @@ export class BotClient extends Client {
     }
 
     getMemberLength() {
-        let i: any = 0;
+        let i = 0;
         for(const gu of this.guilds) {
-            if(gu instanceof Guild) {
-                i += gu.memberCount;
-            } else if(gu instanceof String){
-                let s = gu.toString();
-                const guild = this.guilds.find(g => g.id == s);
-                i += guild.memberCount;
-            }
+            i += gu[1].memberCount;
         }
         return i;
     }
