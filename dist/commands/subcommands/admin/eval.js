@@ -7,14 +7,13 @@ async function execute(interaction) {
     }
     try {
         const res = eval(interaction.options.get('code'));
-        if (res instanceof String) {
-            if (res.includes(process.env.TOKEN)) {
-                res.replace(process.env.TOKEN, "TOKEN HIDDEN");
-            }
+        let nres = res;
+        if (nres.includes(process.env.TOKEN)) {
+            nres.replace(process.env.TOKEN, "TOKEN HIDDEN");
         }
         let embed = {
             title: "Eval Complete",
-            description: `Result\n\n\`\`\`js\n${res}\`\`\``,
+            description: `Result\n\n\`\`\`js\n${nres}\`\`\``,
             timestamp: new Date().toISOString(),
             color: 0x00ff00
         };
