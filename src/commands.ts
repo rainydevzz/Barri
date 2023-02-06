@@ -79,6 +79,20 @@ const commands: Array<any> = [
         ]
     },
     {
+        name: 'unmute',
+        description: 'unmute a user',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        defaultMemberPermissions: `${Permissions.MODERATE_MEMBERS}`,
+        options: [
+            {
+                name: 'user',
+                description: 'user to unmute',
+                type: ApplicationCommandOptionTypes.USER,
+                required: true
+            }
+        ]
+    },
+    {
         name: 'viewsettings',
         description: 'view settings for this guild',
         type: ApplicationCommandTypes.CHAT_INPUT,

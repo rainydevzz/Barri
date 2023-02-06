@@ -79,6 +79,20 @@ const commands = [
         ]
     },
     {
+        name: 'unmute',
+        description: 'unmute a user',
+        type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
+        defaultMemberPermissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
+        options: [
+            {
+                name: 'user',
+                description: 'user to unmute',
+                type: oceanic_js_1.ApplicationCommandOptionTypes.USER,
+                required: true
+            }
+        ]
+    },
+    {
         name: 'viewsettings',
         description: 'view settings for this guild',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
