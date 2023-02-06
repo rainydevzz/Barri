@@ -28,7 +28,7 @@ const commands: Array<any> = [
         name: 'lock',
         description: 'lock a channel!',
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.MANAGE_CHANNELS,
+        defaultMemberPermissions: `${Permissions.MANAGE_CHANNELS}`,
         options: [
             {
                 name: 'channel',
@@ -42,7 +42,7 @@ const commands: Array<any> = [
         name: 'unlock',
         description: 'unlock a channel!',
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.MANAGE_CHANNELS,
+        defaultMemberPermissions: `${Permissions.MANAGE_CHANNELS}`,
         options: [
             {
                 name: 'channel',
@@ -56,7 +56,7 @@ const commands: Array<any> = [
         name: 'mute',
         description: 'mute a user',
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.MODERATE_MEMBERS,
+        defaultMemberPermissions: `${Permissions.MODERATE_MEMBERS}`,
         options: [
             {
                 name: 'user',
@@ -82,13 +82,13 @@ const commands: Array<any> = [
         name: 'viewsettings',
         description: 'view settings for this guild',
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.MANAGE_GUILD
+        defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`
     },
     {
         name: "ban",
         description: "ban a user!",
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.BAN_MEMBERS,
+        defaultMemberPermissions: `${Permissions.BAN_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -108,7 +108,7 @@ const commands: Array<any> = [
         name: "kick",
         description: "kick a user!",
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.MODERATE_MEMBERS,
+        defaultMemberPermissions: `${Permissions.MODERATE_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -128,7 +128,7 @@ const commands: Array<any> = [
         name: "unban",
         description: "unban someone",
         type: ApplicationCommandTypes.CHAT_INPUT,
-        default_member_permissions: Permissions.BAN_MEMBERS,
+        defaultMemberPermissions: `${Permissions.BAN_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -147,7 +147,7 @@ const commands: Array<any> = [
                 name: 'setup',
                 description: 'Setup Warn System',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'mutelimit',
@@ -185,7 +185,7 @@ const commands: Array<any> = [
                 name: 'add',
                 description: 'Warn Someone',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -199,7 +199,7 @@ const commands: Array<any> = [
                 name: 'remove',
                 description: 'remove a warn',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -213,13 +213,13 @@ const commands: Array<any> = [
                 name: 'reset',
                 description: 'reset warns settings',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
             },
             {
                 name: 'resetwarns',
                 description: 'reset warns for a user',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -253,7 +253,7 @@ const commands: Array<any> = [
                 name: 'setup',
                 description: 'setup antispam',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'messagecount',
@@ -279,13 +279,13 @@ const commands: Array<any> = [
                 name: 'reset',
                 description: 'reset antispam',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`
             },
             {
                 name: 'addexception',
                 description: 'add an exception to antispam',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'id',
@@ -299,7 +299,7 @@ const commands: Array<any> = [
                 name: 'removeexception',
                 description: 'remove an exception from antispam',
                 type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                default_member_permissions: Permissions.MANAGE_GUILD,
+                defaultMemberPermissions: `${Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'id',
