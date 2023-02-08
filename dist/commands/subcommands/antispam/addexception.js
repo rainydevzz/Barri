@@ -3,9 +3,10 @@ exports.execute = void 0;
 async function execute(interaction) {
     await interaction.defer();
     const res = await interaction.client.db.ignoretable.findFirst({
-        where: {
-            id: interaction.options.get('id')
-        }
+        where: { AND: {
+                id: interaction.options.get('id'),
+                guild: interaction.guildID
+            } }
     });
     if (!res) {
         await interaction.client.db.ignoretable.create({
