@@ -11,8 +11,9 @@ async function execute(interaction) {
     if (!res) {
         await interaction.client.db.ignoretable.create({
             data: {
-                id: interaction.options.get('id'),
-                guild: interaction.guildID
+                id: interaction.client.genString(),
+                guild: interaction.guildID,
+                user: interaction.user.id
             }
         });
         await interaction.createFollowup({ content: `ID ${interaction.options.get('id')} added!` });

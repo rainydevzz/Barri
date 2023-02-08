@@ -31,6 +31,7 @@ model warns {
 }
 
 model ignoretable {
-  id    String @id
-  guild String
+  id    String  @id
+  user  String?
+  guild String?
 }
