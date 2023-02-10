@@ -2,7 +2,7 @@ import { BotClient } from "../bot";
 import { Message, ChannelTypes } from "oceanic.js";
 
 export async function execute(bot: BotClient, msg: Message) {
-    if(msg.author.bot) return;
+    if(msg.author.bot || msg.author.id == bot.user.id) return;
     if(msg.channel.type == ChannelTypes.DM) return;
 
     if(msg.content.includes(bot.user.mention)) {

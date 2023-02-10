@@ -2,7 +2,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.name = exports.execute = void 0;
 const oceanic_js_1 = require("oceanic.js");
 async function execute(bot, msg) {
-    if (msg.author.bot)
+    if (msg.author.bot || msg.author.id == bot.user.id)
         return;
     if (msg.channel.type == oceanic_js_1.ChannelTypes.DM)
         return;

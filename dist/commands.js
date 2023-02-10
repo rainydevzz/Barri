@@ -28,7 +28,7 @@ const commands = [
         name: 'lock',
         description: 'lock a channel!',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_CHANNELS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_CHANNELS}`,
         options: [
             {
                 name: 'channel',
@@ -42,7 +42,7 @@ const commands = [
         name: 'unlock',
         description: 'unlock a channel!',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_CHANNELS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_CHANNELS}`,
         options: [
             {
                 name: 'channel',
@@ -56,7 +56,7 @@ const commands = [
         name: 'mute',
         description: 'mute a user',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
         options: [
             {
                 name: 'user',
@@ -82,7 +82,7 @@ const commands = [
         name: 'unmute',
         description: 'unmute a user',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
         options: [
             {
                 name: 'user',
@@ -96,13 +96,13 @@ const commands = [
         name: 'viewsettings',
         description: 'view settings for this guild',
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`
+        default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`
     },
     {
         name: "ban",
         description: "ban a user!",
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.BAN_MEMBERS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.BAN_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -122,7 +122,7 @@ const commands = [
         name: "kick",
         description: "kick a user!",
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.MODERATE_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -142,7 +142,7 @@ const commands = [
         name: "unban",
         description: "unban someone",
         type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
-        defaultMemberPermissions: `${oceanic_js_1.Permissions.BAN_MEMBERS}`,
+        default_member_permissions: `${oceanic_js_1.Permissions.BAN_MEMBERS}`,
         options: [
             {
                 name: "user",
@@ -161,7 +161,7 @@ const commands = [
                 name: 'setup',
                 description: 'Setup Warn System',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'mutelimit',
@@ -199,7 +199,7 @@ const commands = [
                 name: 'add',
                 description: 'Warn Someone',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -213,7 +213,7 @@ const commands = [
                 name: 'remove',
                 description: 'remove a warn',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -227,13 +227,13 @@ const commands = [
                 name: 'reset',
                 description: 'reset warns settings',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
             },
             {
                 name: 'resetwarns',
                 description: 'reset warns for a user',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'user',
@@ -267,7 +267,7 @@ const commands = [
                 name: 'setup',
                 description: 'setup antispam',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'messagecount',
@@ -293,13 +293,13 @@ const commands = [
                 name: 'reset',
                 description: 'reset antispam',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`
             },
             {
                 name: 'addexception',
                 description: 'add an exception to antispam',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'id',
@@ -313,7 +313,7 @@ const commands = [
                 name: 'removeexception',
                 description: 'remove an exception from antispam',
                 type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
-                defaultMemberPermissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
                 options: [
                     {
                         name: 'id',

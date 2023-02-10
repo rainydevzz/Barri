@@ -24,7 +24,15 @@ class BotClient extends oceanic_js_1.Client {
             console.log(`${this.user.tag} is up! Initializing...`);
             await this.syncCommands();
             await this.db.$connect();
-            console.log("Setup complete!");
+            console.log("Connected to DB!");
+            fetch(`https://discordbotlist.com/api/v1/bots/1020163915189067816/commands`, {
+                method: 'POST',
+                body: JSON.stringify(commands_1.default),
+                headers: {
+                    'Authorization': process.env.DBL,
+                    'Content-Type': 'application/json'
+                }
+            }).then(_ => { console.log("Synced Commands to DBL!"); });
         }
         catch (e) {
             console.error("Uh oh, something went wrong. Error:", e);

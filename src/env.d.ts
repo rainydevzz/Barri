@@ -4,6 +4,7 @@ declare global {
             TOKEN: string;
             DB_URL: string;
             OWNERS: string;
+            DBL: string;
         }
     }
 }
