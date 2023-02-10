@@ -3,60 +3,76 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = void 0;
-const oceanic_js_1 = require("oceanic.js");
 const commands_1 = __importDefault(require("../commands"));
 async function execute(interaction) {
-    if (!interaction.options.get('command')) {
+    let cmd = interaction.options.get('command');
+    if (cmd) {
+        if (cmd.includes(' ')) {
+            let args = cmd.split(' ');
+            let cmdres = commands_1.default.find(c => c.name == args[0].toLowerCase());
+            if (!cmdres) {
+                await interaction.createMessage({ content: `command ${args[0]} not found!` });
+                return;
+            }
+            if (cmdres.options[0] && cmdres.options[0].type != 1) {
+                await interaction.createMessage({ content: `command ${args[0]} has no subcommands!` });
+                return;
+            }
+            let subcmd = cmdres.options.filter(c => c.name == args[1].toLowerCase())[0];
+            if (!subcmd) {
+                await interaction.createMessage({ content: `subcommand ${args[1]} not found!` });
+                return;
+            }
+            let descStr = "";
+            if (!subcmd.options) {
+                descStr += "No Options";
+            }
+            else {
+                for (const o of subcmd.options) {
+                    descStr += `**${o.name}** - ${o.description}\n`;
+                }
+            }
+            let embed = {
+                title: `Command Info For ${cmd}`,
+                description: descStr,
+                color: 0x000099
+            };
+            await interaction.createMessage({ embeds: [embed] });
+        }
+        else {
+            let cmdres = commands_1.default.find(c => c.name == cmd.toLowerCase());
+            if (!cmdres) {
+                await interaction.createMessage({ content: `command ${cmd} not found!` });
+                return;
+            }
+            let descStr = "";
+            if (!cmdres.options) {
+                descStr += "No Options";
+            }
+            else {
+                for (const o of cmdres.options) {
+                    descStr += `**${o.name}** - ${o.description}\n`;
+                }
+            }
+            let embed = {
+                title: `Command Info For ${cmd}`,
+                description: descStr,
+                color: 0x000099
+            };
+            await interaction.createMessage({ embeds: [embed] });
+        }
+    }
+    else {
         let descStr = "";
         for (const c of commands_1.default) {
             descStr += `**${c.name}** - ${c.description}\n`;
         }
         let embed = {
-            title: 'Help Commands',
+            title: `Command Info`,
             description: descStr,
-            color: 0x072a6c
+            color: 0x000099
         };
         await interaction.createMessage({ embeds: [embed] });
-        return;
-    }
-    else {
-        let opt = interaction.options.get('command');
-        let opt2 = commands_1.default.find(c => c.name == opt);
-        if (!opt2) {
-            await interaction.createMessage({ content: "no command found by that name!" });
-            return;
-        }
-        if (opt.type == oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND) {
-            let descStr = "";
-            for (const o of opt2.options) {
-                descStr += `**${o.name}** - ${o.description}\n`;
-            }
-            let embed = {
-                title: 'Help Commands',
-                description: descStr,
-                color: 0x072a6c
-            };
-            await interaction.createMessage({ embeds: [embed] });
-            return;
-        }
-        else {
-            let descStr = "";
-            if (opt2.options !== undefined) {
-                for (const c of opt2.options) {
-                    descStr += `**${c.name}** - ${c.description}\n`;
-                }
-            }
-            else {
-                descStr = "No Options";
-            }
-            let embed = {
-                title: `Help for ${opt2.name}`,
-                description: descStr,
-                color: 0x072a6c
-            };
-            await interaction.createMessage({ embeds: [embed] });
-            return;
-        }
     }
 }
 exports.execute = execute;
