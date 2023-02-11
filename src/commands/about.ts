@@ -17,8 +17,12 @@ export async function execute(interaction: ExtInteraction): Promise<void> {
                 value: "[Here](https://discord.gg/q3z4EyWBNe)"
             },
             {
-                name : 'Top.gg (Vote Here!)',
+                name: 'Top.gg (Vote Here!)',
                 value: "[Here](https://top.gg/bot/1020163915189067816)"
+            },
+            {
+                name: 'Discord Bot List (Vote Here Too!)',
+                value: "[Here](https://discordbotlist.com/bots/barri)"
             }
         ]
     }

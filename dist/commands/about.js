@@ -19,6 +19,10 @@ async function execute(interaction) {
             {
                 name: 'Top.gg (Vote Here!)',
                 value: "[Here](https://top.gg/bot/1020163915189067816)"
+            },
+            {
+                name: 'Discord Bot List (Vote Here Too!)',
+                value: "[Here](https://discordbotlist.com/bots/barri)"
             }
         ]
     };
