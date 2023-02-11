@@ -15,6 +15,7 @@ class BotClient extends oceanic_js_1.Client {
     dbCache = new Map();
     ignoreCache = new Map();
     db = client_1.default;
+    joinHook;
     async syncCommands() {
         await this.application.bulkEditGlobalCommands(commands_1.default);
         console.log(`${this.getCommandsLength()} commands synced!`);
@@ -33,6 +34,7 @@ class BotClient extends oceanic_js_1.Client {
                     'Content-Type': 'application/json'
                 }
             }).then(_ => { console.log("Synced Commands to DBL!"); });
+            this.joinHook = (await this.guilds.find(g => g.id == process.env.DEV_SERVER).getWebhooks()).find(w => w.token == process.env.JOIN_HOOK);
         }
         catch (e) {
             console.error("Uh oh, something went wrong. Error:", e);

@@ -1,4 +1,4 @@
-import { Client, Message, BotActivity, Guild } from 'oceanic.js';
+import { Client, Message, BotActivity, Webhook } from 'oceanic.js';
 import { ExtInteraction } from './types/extinteraction';
 import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
@@ -16,6 +16,7 @@ export class BotClient extends Client {
     dbCache: Map<String, DBOPtions> = new Map();
     ignoreCache: Map<String, IgnoreOptions> = new Map();
     db: PrismaClient = client;
+    joinHook: Webhook;
 
     async syncCommands(): Promise<void> {
         await this.application.bulkEditGlobalCommands(commands);
@@ -36,6 +37,7 @@ export class BotClient extends Client {
                     'Content-Type': 'application/json'
                 }
             }).then(_ => {console.log("Synced Commands to DBL!")});
+            this.joinHook = (await this.guilds.find(g => g.id == process.env.DEV_SERVER).getWebhooks()).find(w => w.token == process.env.JOIN_HOOK);
         } catch (e) {
             console.error("Uh oh, something went wrong. Error:", e);
         }
