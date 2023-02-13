@@ -26,7 +26,7 @@ class BotClient extends oceanic_js_1.Client {
             await this.syncCommands();
             await this.db.$connect();
             console.log("Connected to DB!");
-            fetch(`https://discordbotlist.com/api/v1/bots/1020163915189067816/commands`, {
+            fetch(`https://discordbotlist.com/api/v1/bots/${this.user.id}/commands`, {
                 method: 'POST',
                 body: JSON.stringify(commands_1.default),
                 headers: {

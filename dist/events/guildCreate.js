@@ -17,6 +17,10 @@ async function execute(bot, guild) {
             {
                 name: 'Created At',
                 value: guild.createdAt.toUTCString()
+            },
+            {
+                name: 'Guild ID',
+                value: `${guild.id}`
             }
         ]
     };
