@@ -7,6 +7,10 @@ export async function execute(interaction: ExtInteraction) {
     const bl = interaction.options.get('banlimit') || -1;
     const os = interaction.options.get('onspam') || false;
     let du = interaction.options.get('muteduration') || -1;
+    if((du == -1 && ml != -1) || (du != -1 && ml == -1)) {
+        await interaction.createFollowup({content: "Must assign duration to timeout!"});
+        return;
+    }
     await interaction.client.db.warnsys.upsert({
         where: {guild: interaction.guildID},
         update: {
