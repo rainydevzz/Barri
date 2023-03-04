@@ -45,7 +45,7 @@ class BotClient extends oceanic_js_1.Client {
         while (true) {
             await this.editStatus('online', [activities[i % activities.length]]);
             i++;
-            await new Promise((res) => { setTimeout(res, 20000); });
+            await new Promise((res) => { setTimeout(res, 25000); });
         }
     }
     async altWarns(interaction, num, userID) {

@@ -48,7 +48,7 @@ export class BotClient extends Client {
         while(true) {
             await this.editStatus('online', [activities[i % activities.length]]);
             i++;
-            await new Promise((res) => {setTimeout(res, 20000)});
+            await new Promise((res) => {setTimeout(res, 25000)});
         }
     }
 

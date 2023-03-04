@@ -22,8 +22,4 @@ export const bot = new BotClient(
 
 bot.startEventHandler();
 
-process.on('uncaughtException', (err) => {
-    console.error(err);
-});
-
 bot.connect();

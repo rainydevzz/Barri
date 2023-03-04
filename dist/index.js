@@ -21,7 +21,4 @@ exports.bot = new bot_1.BotClient({
     },
 });
 exports.bot.startEventHandler();
-process.on('uncaughtException', (err) => {
-    console.error(err);
-});
 exports.bot.connect();
