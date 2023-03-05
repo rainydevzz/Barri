@@ -1,7 +1,6 @@
-import { Client, Message, BotActivity, Webhook, TextChannel } from 'oceanic.js';
+import { Client, Message, BotActivity, Webhook } from 'oceanic.js';
 import { ExtInteraction } from './types/extinteraction';
-import { PrismaClient, sticky } from '@prisma/client';
-import { StickyOptions } from './types/stickyoptions';
+import { PrismaClient } from '@prisma/client';
 import { DBOPtions } from './types/dboptions';
 import { IgnoreOptions } from './types/ignoreoptions';
 import commands from './commands';
@@ -16,7 +15,6 @@ export class BotClient extends Client {
     spamCache: Map<String, Array<any>> = new Map();
     dbCache: Map<String, DBOPtions> = new Map();
     ignoreCache: Map<String, IgnoreOptions> = new Map();
-    stickyCache: Map<string, StickyOptions> = new Map();
     db: PrismaClient = client;
     joinHook: Webhook;
 
@@ -217,52 +215,13 @@ export class BotClient extends Client {
         }
     }
 
-    async checkSticky(message: Message) {
-        let res = this.stickyCache.get(message.channelID);
-        if(!res) return;
-        let channel = this.guilds.find(g => g.id == message.guildID).channels.find(c => c.id == message.channelID) as TextChannel;
-        if(res.resend) {
-            await channel.deleteMessage(res.message);
-            await new Promise(r => {setTimeout(r, 1500)});
-            const msg = await channel.createMessage({content: res.content});
-            this.stickyCache.set(channel.id, {resend: false, content: res.content, message: msg.id, time: new Date().getTime()});
-        }
-    }
-
-    async createSticky(channel: TextChannel, content: string): Promise<true | 'channel' | 'guild'> {
-        const res = await this.db.sticky.findMany({
-            where: {guild: channel.guildID}
-        });
-        if(res.length == 5) return 'guild';
-        const channelRes = this.stickyCache.get(channel.id);
-        if(channelRes) return 'channel';
-        await this.db.sticky.create({
-            data: {
-                id: this.genString(),
-                guild: channel.guildID,
-                channel: channel.id,
-                content: content
-            }
-        });
-        const msg = await channel.createMessage({content: content});
-        this.stickyCache.set(channel.id, {content: content, message: msg.id, resend: false, time: new Date().getTime()});
-        return true;
-    }
-
-    async deleteSticky(channel: TextChannel) {
-        await this.db.sticky.deleteMany({
-            where: {channel: channel.id}
-        });
-        this.stickyCache.delete(channel.id);
-    }
-
     isOwner(id: string): boolean {
         const owners = process.env.OWNERS.split(' ');
         return owners.includes(id);
     }
 
     genString(): string {
-        const r = Math.random().toString(36).substring(2, 20);
+        const r = Math.random().toString(36).substring(2, 18);
         return r;
     }
 

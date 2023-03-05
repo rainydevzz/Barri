@@ -17,11 +17,6 @@ async function execute(bot, msg) {
             };
             await msg.channel.createMessage({ embeds: [embed] });
         }
-        const channelRes = bot.stickyCache.get(msg.channelID);
-        if (channelRes && (new Date().getTime() - channelRes.time > 15000)) {
-            await bot.checkSticky(msg);
-            console.log('aaa');
-        }
         const r = await bot.checkSpam(msg);
         if (r && bot.dbCache.get(msg.guildID).onspam) {
             if (bot.isOwner(msg.author.id)) {

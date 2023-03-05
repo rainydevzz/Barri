@@ -35,10 +35,3 @@ model ignoretable {
   user  String?
   guild String?
 }
-
-model sticky {
-  id      String @id
-  guild   String
-  channel String
-  content String
-}
