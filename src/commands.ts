@@ -367,6 +367,47 @@ const commands: Array<any> = [
                 ]
             }
         ]
+    },
+    {
+        name: 'sticky',
+        description: 'sticky message commands',
+        type: ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'set',
+                description: 'set a sticky message for a channel!',
+                default_member_permissions: `${Permissions.MANAGE_GUILD}`,
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'channel',
+                        description: 'channel to send the message to',
+                        type: ApplicationCommandOptionTypes.CHANNEL,
+                        required: true
+                    },
+                    {
+                        name: 'content',
+                        description: 'content of the message',
+                        type: ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'delete',
+                description: 'delete a stickied message',
+                default_member_permissions: `${Permissions.MANAGE_GUILD}`,
+                type: ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'channel',
+                        description: 'channel of the message',
+                        type: ApplicationCommandOptionTypes.CHANNEL,
+                        required: true
+                    }
+                ]
+            }
+        ]
     }
 ];
 

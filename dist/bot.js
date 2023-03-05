@@ -14,6 +14,7 @@ class BotClient extends oceanic_js_1.Client {
     spamCache = new Map();
     dbCache = new Map();
     ignoreCache = new Map();
+    stickyCache = new Map();
     db = client_1.default;
     joinHook;
     async syncCommands() {
@@ -229,12 +230,51 @@ class BotClient extends oceanic_js_1.Client {
             return false;
         }
     }
+    async checkSticky(message) {
+        let res = this.stickyCache.get(message.channelID);
+        if (!res)
+            return;
+        let channel = this.guilds.find(g => g.id == message.guildID).channels.find(c => c.id == message.channelID);
+        if (res.resend) {
+            await channel.deleteMessage(res.message);
+            await new Promise(r => { setTimeout(r, 1500); });
+            const msg = await channel.createMessage({ content: res.content });
+            this.stickyCache.set(channel.id, { resend: false, content: res.content, message: msg.id, time: new Date().getTime() });
+        }
+    }
+    async createSticky(channel, content) {
+        const res = await this.db.sticky.findMany({
+            where: { guild: channel.guildID }
+        });
+        if (res.length == 5)
+            return 'guild';
+        const channelRes = this.stickyCache.get(channel.id);
+        if (channelRes)
+            return 'channel';
+        await this.db.sticky.create({
+            data: {
+                id: this.genString(),
+                guild: channel.guildID,
+                channel: channel.id,
+                content: content
+            }
+        });
+        const msg = await channel.createMessage({ content: content });
+        this.stickyCache.set(channel.id, { content: content, message: msg.id, resend: false, time: new Date().getTime() });
+        return true;
+    }
+    async deleteSticky(channel) {
+        await this.db.sticky.deleteMany({
+            where: { channel: channel.id }
+        });
+        this.stickyCache.delete(channel.id);
+    }
     isOwner(id) {
         const owners = process.env.OWNERS.split(' ');
         return owners.includes(id);
     }
     genString() {
-        const r = Math.random().toString(36).substring(2, 18);
+        const r = Math.random().toString(36).substring(2, 20);
         return r;
     }
     getCommandsLength() {

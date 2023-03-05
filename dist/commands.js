@@ -367,6 +367,47 @@ const commands = [
                 ]
             }
         ]
+    },
+    {
+        name: 'sticky',
+        description: 'sticky message commands',
+        type: oceanic_js_1.ApplicationCommandTypes.CHAT_INPUT,
+        options: [
+            {
+                name: 'set',
+                description: 'set a sticky message for a channel!',
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'channel',
+                        description: 'channel to send the message to',
+                        type: oceanic_js_1.ApplicationCommandOptionTypes.CHANNEL,
+                        required: true
+                    },
+                    {
+                        name: 'content',
+                        description: 'content of the message',
+                        type: oceanic_js_1.ApplicationCommandOptionTypes.STRING,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'delete',
+                description: 'delete a stickied message',
+                default_member_permissions: `${oceanic_js_1.Permissions.MANAGE_GUILD}`,
+                type: oceanic_js_1.ApplicationCommandOptionTypes.SUB_COMMAND,
+                options: [
+                    {
+                        name: 'channel',
+                        description: 'channel of the message',
+                        type: oceanic_js_1.ApplicationCommandOptionTypes.CHANNEL,
+                        required: true
+                    }
+                ]
+            }
+        ]
     }
 ];
 exports.default = commands;
