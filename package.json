@@ -13,7 +13,7 @@
   "dependencies": {
     "@prisma/client": "^4.8.1",
     "dotenv": "^16.0.3",
-    "oceanic.js": "^1.5.1",
+    "oceanic.js": "^1.6.0",
     "prisma": "^4.8.1",
     "typescript": "^4.9.5"
   },
