@@ -180,7 +180,7 @@ class BotClient extends oceanic_js_1.Client {
     }
     async checkSpam(msg) {
         const check = await this.checkIgnore(msg);
-        if (!check)
+        if (check)
             return false;
         let res = this.dbCache.get(msg.guildID);
         if (!res || (res && new Date().getTime() - res.timestamp >= 120000)) { // checks if it's been over 2 minutes since last cache refresh or cache record doesn't exist

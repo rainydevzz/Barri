@@ -180,7 +180,7 @@ export class BotClient extends Client {
 
     async checkSpam(msg: Message): Promise<boolean> {
         const check = await this.checkIgnore(msg);
-        if(!check) return false;
+        if(check) return false;
         let res = this.dbCache.get(msg.guildID);
         if(!res || (res && new Date().getTime() - res.timestamp >= 120000)) { // checks if it's been over 2 minutes since last cache refresh or cache record doesn't exist
             let dbres = await this.db.antispam.findFirst({where: {guild: msg.guildID}});
