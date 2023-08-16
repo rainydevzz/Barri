@@ -2,8 +2,6 @@
 
 **A Moderation Bot written in Typescript using the Oceanic Library.**
 
-**You can find the official instance [here!](https://shorturl.at/rxRY3)**
-
 ## Features
 
 - Basic Moderation (kick, ban, timeout, etc.)
@@ -11,8 +9,6 @@
 - Customizable Settings (warn and antispam system)
 - Warn System (with Auto-Punishing)
 - Bot Admin Commands (eval, system stats, kill process)
-
-**Since I am now running my own instance, specific instructions for bot setup have been removed. I will still accept issues and questions about the bot and provide support.**
 
 #### Learning Resources
 
